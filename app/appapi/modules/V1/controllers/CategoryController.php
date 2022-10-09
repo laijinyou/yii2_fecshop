@@ -18,13 +18,13 @@ use Yii;
 class CategoryController extends AppapiTokenController
 {
     public $numPerPage = 5;
-    
+
     /**
      * Get Lsit Api：得到Category 列表的api
      */
     public function actionList()
     {
-        
+
         $page = Yii::$app->request->get('page');
         $numPerPage = Yii::$app->request->get('numPerPage');
         $page = $page ? $page : 1;
@@ -73,14 +73,14 @@ class CategoryController extends AppapiTokenController
         $primaryKeyVal = Yii::$app->request->get('id');
         $data          = [];
         if ( !$url_key && !$primaryKeyVal ) {
-            
+
             return [
                 'code'    => 400,
                 'message' => 'request param [url_key,id] can not all empty',
                 'data'    => [],
             ];
         } else if ($primaryKeyVal) {
-           
+
             $category = Yii::$service->category->getByPrimaryKey($primaryKeyVal);
             if(isset($category['url_key']) && $category['url_key']){
                 $data = $category;
@@ -92,7 +92,7 @@ class CategoryController extends AppapiTokenController
             }
         }
         if (empty($data)) {
-            
+
             return [
                 'code'    => 400,
                 'message' => 'can not find category by id or url_key',
@@ -110,7 +110,7 @@ class CategoryController extends AppapiTokenController
                 'message' => 'fetch category success',
                 'data'    => $data,
             ];
-        } 
+        }
     }
     /**
      * Add One Api：新增一条记录的api
@@ -143,10 +143,10 @@ class CategoryController extends AppapiTokenController
         $meta_keywords      = Yii::$app->request->post('meta_keywords');
         // 选填 多语言
         $meta_description   = Yii::$app->request->post('meta_description');
-       
-        if (!$parent_id && $parent_id !== '0') {
-            $error[] = '[parent_id] can not empty';
-        }
+
+        // if (!$parent_id && $parent_id !== '0') {
+        //     $error[] = '[parent_id] can not empty';
+        // }
         if (!$name) {
             $error[] = '[name] can not empty';
         }
@@ -218,7 +218,7 @@ class CategoryController extends AppapiTokenController
         $name               = Yii::$app->request->post('name');
         // 选填
         $menu_show             = Yii::$app->request->post('menu_show');
-        
+
         $status             = Yii::$app->request->post('status');
         // 选填
         $url_key            = Yii::$app->request->post('url_key');
@@ -284,7 +284,7 @@ class CategoryController extends AppapiTokenController
         $meta_description   ? ($param['meta_description'] = $meta_description)  : '';
         $status             ? ($param['status'] = $status)                      : '';
         $menu_show          ? ($param['menu_show'] = $menu_show)                      : '';
-        
+
         $description                ? ($param['description'] = $description)                    : '';
         $menu_custom                ? ($param['menu_custom'] = $menu_custom)                    : '';
         $filter_product_attr_selected               ? ($param['filter_product_attr_selected'] = $filter_product_attr_selected)     : '';
@@ -303,9 +303,9 @@ class CategoryController extends AppapiTokenController
             ]
         ];
     }
-    
-    
-    
+
+
+
     /**
      * Update One Api：更新一条记录的api
      */
@@ -319,7 +319,7 @@ class CategoryController extends AppapiTokenController
         $name               = Yii::$app->request->post('name');
         // 选填
         $menu_show             = Yii::$app->request->post('menu_show');
-        
+
         $status             = Yii::$app->request->post('status');
         // 选填
         $url_key            = Yii::$app->request->post('url_key');
@@ -385,7 +385,7 @@ class CategoryController extends AppapiTokenController
         $meta_description   ? ($param['meta_description'] = $meta_description)  : '';
         $status             ? ($param['status'] = $status)                      : '';
         $menu_show          ? ($param['menu_show'] = $menu_show)                      : '';
-        
+
         $description                ? ($param['description'] = $description)                    : '';
         $menu_custom                ? ($param['menu_custom'] = $menu_custom)                    : '';
         $filter_product_attr_selected               ? ($param['filter_product_attr_selected'] = $filter_product_attr_selected)     : '';
@@ -404,9 +404,9 @@ class CategoryController extends AppapiTokenController
             ]
         ];
     }
-    
-    
-    
+
+
+
     /**
      * Update One Api：更新一条记录的api
      */
@@ -422,7 +422,7 @@ class CategoryController extends AppapiTokenController
         $name               = Yii::$app->request->post('name');
         // 选填
         $menu_show             = Yii::$app->request->post('menu_show');
-        
+
         $status             = Yii::$app->request->post('status');
         // 选填
         $url_key            = Yii::$app->request->post('url_key');
@@ -460,7 +460,7 @@ class CategoryController extends AppapiTokenController
         if (!$param['parent_id']) {
             $param['parent_id'] = 0;
         }
-        
+
         $param['remote_id'] = $remote_id;
         $param['remote_parent_id'] = $remote_parent_id;
         //if (!$name) {
@@ -494,7 +494,7 @@ class CategoryController extends AppapiTokenController
                 ],
             ];
         }
-        
+
         $identity = Yii::$app->user->identity;
         //$param['parent_id'] = $parent_id;
         $param['name']      = $name;
@@ -504,7 +504,7 @@ class CategoryController extends AppapiTokenController
         $meta_description   ? ($param['meta_description'] = $meta_description)  : '';
         $status             ? ($param['status'] = $status)                      : '';
         $menu_show          ? ($param['menu_show'] = $menu_show)                      : '';
-        
+
         $description                ? ($param['description'] = $description)                    : '';
         $menu_custom                ? ($param['menu_custom'] = $menu_custom)                    : '';
         $filter_product_attr_selected               ? ($param['filter_product_attr_selected'] = $filter_product_attr_selected)     : '';
@@ -512,7 +512,7 @@ class CategoryController extends AppapiTokenController
         $thumbnail_image            ? ($param['thumbnail_image'] = $thumbnail_image)            : '';
         $image                      ? ($param['image'] = $image)               : '';
         $originUrlKey       = 'catalog/category/index';
-        
+
         //$param[$primaryKey] = $id;
         $saveData = Yii::$service->category->save($param, $originUrlKey);
         return [
@@ -523,8 +523,8 @@ class CategoryController extends AppapiTokenController
             ]
         ];
     }
-    
-    
+
+
     /**
      * Delete One Api：删除一条记录的api
      */
@@ -548,8 +548,8 @@ class CategoryController extends AppapiTokenController
             ];
         }
     }
-    
-    
+
+
     /**
      * 用于测试的action
      */
@@ -560,5 +560,5 @@ class CategoryController extends AppapiTokenController
         //var_dump();exit;
         //var_dump(get_class(Yii::$service->cms->article->getByPrimaryKey('')));
     }
-    
+
 }
