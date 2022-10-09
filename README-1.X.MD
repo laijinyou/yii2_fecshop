@@ -197,7 +197,7 @@ Controller，Block，Views，View Layout，
 路径优先级来实现的，其他的是通过配置文件的覆盖更改来实现重写，这样，用户
 就可以很方便重构[Fecmall](http://www.fecmall.com)或者第三方的功能和模板。
 
-6. 升级最小化干扰，[Fecmall](http://www.fecmall.com)的核心文件是放到vendor/fancyecommerce/fecshop
+6. 升级最小化干扰，[Fecmall](http://www.fecmall.com)的核心文件是放到vendor/laijinyou/yii2_fecshop
 路径下面，和第三方扩展，用户二次开发路径完全隔离开，
 Fecmall可以通过composer进行核心功能的升级，用户只需要通过composer升级
 即可。

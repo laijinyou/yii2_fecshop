@@ -47,14 +47,14 @@ class ErrorHandlerLog extends ActiveRecord
             'ip',           // 访问人的ip
             'name',         // 错误的名字
             'trace_string', // 错误的追踪信息
-            'url',          // 
+            'url',          //
             'request_info', // request 信息
        ];
     }
     /**
      * "code": 500,
      * "message": "syntax error, unexpected '}'",
-     * "file": "/www/web/develop/fecshop/vendor/fancyecommerce/fecshop/app/appserver/modules/Customer/controllers/TestController.php",
+     * "file": "/www/web/develop/fecshop/vendor/laijinyou/yii2_fecshop/app/appserver/modules/Customer/controllers/TestController.php",
      * "line": 27,
      * "time": "2017-11-30 14:26:34",
      * "ip": "183.14.76.88"

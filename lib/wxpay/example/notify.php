@@ -8,13 +8,13 @@ error_reporting(E_ERROR);
 
 //初始化日志
 //$logHandler= new CLogFileHandler("../logs/".date('Y-m-d').'.log');
-$logHandler= new CLogFileHandler("/www/web/develop/fecshop/vendor/fancyecommerce/fecshop/lib/wxpay/logs/test.log");
+$logHandler= new CLogFileHandler("/www/web/develop/fecshop/vendor/laijinyou/yii2_fecshop/lib/wxpay/logs/test.log");
 $log = Log::Init($logHandler, 15);
 
 class PayNotifyCallBack extends WxPayNotify
 {
 	public $postData;
-    
+
     //查询订单
 	public function Queryorder($transaction_id)
 	{
@@ -31,14 +31,14 @@ class PayNotifyCallBack extends WxPayNotify
 		}
 		return false;
 	}
-	
+
 	//重写回调处理函数
 	public function NotifyProcess($data, &$msg)
 	{
-		
+
         Log::DEBUG("call back:" . json_encode($data));
 		$notfiyOutput = array();
-		
+
 		if(!array_key_exists("transaction_id", $data)){
 			$msg = "输入参数不正确";
 			return false;
@@ -51,7 +51,7 @@ class PayNotifyCallBack extends WxPayNotify
         $arr = $this->getDataArray($data);
         return \Yii::$service->payment->wxpay->ipnOrderProcess($arr);
 	}
-    
+
     public function getDataArray($data){
         $arr = [];
         foreach($data as $k => $v){
@@ -59,7 +59,7 @@ class PayNotifyCallBack extends WxPayNotify
         }
         return $arr;
     }
-    
+
 }
 
 

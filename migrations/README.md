@@ -34,7 +34,7 @@
 
 2.2.2 mongodb的示例数据存放路径为：
 
-/vendor/fancyecommerce/fecshop/migrations/mongodb-example-data/example_data.js
+/vendor/laijinyou/yii2_fecshop/migrations/mongodb-example-data/example_data.js
 
 可以通过mongodb的后台，或者通过php的rockmongo安装这些mongodb中的示例数据。
 

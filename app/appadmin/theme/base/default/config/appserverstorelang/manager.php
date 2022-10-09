@@ -133,10 +133,10 @@ function thissubmit(thiss){
                     在指定语言的同时，也指定了相应的搜索引擎
                 </p >
                 <p >
-                    3.更改设置后，您需要跑一下<b>同步数据</b>的脚本   ./vendor/fancyecommerce/fecshop/shell/search/fullSearchSync.sh
+                    3.更改设置后，您需要跑一下<b>同步数据</b>的脚本   ./vendor/laijinyou/yii2_fecshop/shell/search/fullSearchSync.sh
                  </p>
                 <p >
-                    4.如果是xunsearch，里面有一些其他的历史数据，您可以通过脚本 ./vendor/fancyecommerce/fecshop/shell/search/deleteXunSearchAllData.sh
+                    4.如果是xunsearch，里面有一些其他的历史数据，您可以通过脚本 ./vendor/laijinyou/yii2_fecshop/shell/search/deleteXunSearchAllData.sh
                     来清空xunsearch里面的数据。
                 </p>
                 <p >
