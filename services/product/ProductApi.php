@@ -25,11 +25,11 @@ class ProductApi extends Service
     protected $_error = []; // $this->_error
 
     protected $_param = []; // $this->_param
-    
+
     protected $_productModelName = '';
 
     protected $_productModel;
-    
+
     public function init()
     {
         parent::init();
@@ -40,10 +40,10 @@ class ProductApi extends Service
             $this->_productModelName = '\fecshop\models\mongodb\Product';
             list($this->_productModelName, $this->_productModel) = \Yii::mapGet($this->_productModelName);
         }
-        
-        
+
+
     }
-    
+
     /**
      * @param $post | Array , 数组
      * 检查产品数据的必填以及数据的初始化
@@ -59,7 +59,7 @@ class ProductApi extends Service
         $model = $this->_productModel;
         if (empty($post) || !is_array($post)) {
             $this->_error[] = 'post data is empty or is not array';
-            
+
             return ;
         }
         // 产品名字：【必填】 【多语言属性】
@@ -323,9 +323,9 @@ class ProductApi extends Service
             $this->_param['image'] = $image;
         }
         // 选填 多语言
-        $title = $post['title'];
-        if (!empty($title) && is_array($title)) {
-            $this->_param['title'] = $title;
+        $meta_title = $post['meta_title'];
+        if (!empty($meta_title) && is_array($meta_title)) {
+            $this->_param['meta_title'] = $meta_title;
         }
         // 选填 多语言
         $meta_keywords = $post['meta_keywords'];
@@ -361,8 +361,8 @@ class ProductApi extends Service
             }
         }
     }
-    
-    
+
+
     public function insertByPost($post = [])
     {
         if (empty($post)) {
@@ -370,7 +370,7 @@ class ProductApi extends Service
         }
         $this->checkPostDataRequireAndInt($post);
         if (!empty($this->_error)) {
-            
+
             return [
                 'code'    => 400,
                 'message' => '',
@@ -393,7 +393,7 @@ class ProductApi extends Service
                 $saveData['id'] = (string)$saveData['_id'];
                 unset($saveData['_id']);
             }
-            
+
             return [
                 'code'    => 200,
                 'message' => 'add product success',
@@ -402,7 +402,7 @@ class ProductApi extends Service
                 ]
             ];
         } else {
-            
+
             return [
                 'code'    => 400,
                 'message' => 'save category fail',
@@ -412,15 +412,15 @@ class ProductApi extends Service
             ];
         }
     }
-    
+
     public function insertByShopfwPost($products)
     {
         if (!is_array($products) || empty($products)) {
-            
+
             return;
         }
         $i = 0;
-        
+
         $productSaveData = [];
         $useOriginSpu = false;
         foreach ($products as $product) {
@@ -435,12 +435,12 @@ class ProductApi extends Service
                     if (is_array($spuProducts) && !empty($spuProducts)) {
                         // 如果已经存在，则退出
                         Yii::$service->helper->errors->add('spu['.$product['spu'].'] is exist');
-                        
+
                         return ;
                     }
                     $useOriginSpu = true;
                 }
-                
+
             }
             if (!$useOriginSpu) {
                 $spu = $this->generateSpu();
@@ -449,29 +449,29 @@ class ProductApi extends Service
                 $spu = $product['spu'];
                 $sku = $product['sku'];
             }
-            
+
             if ($saveData = $this->insertByShopfwItem($product, $spu, $sku, $is_deputy)) {
                 $productSaveData[] = $saveData;
             }
         }
-        
+
         return $productSaveData;
     }
-    
+
     public function generateSku($spu)
     {
         $randStr = $this->getRandStr(6);
-        
+
         return $spu .'-'.$randStr;
     }
-    
+
     public function generateSpu()
     {
         $randStr = $this->getRandStr(4);
-        
+
         return $randStr.time();
     }
-    
+
     protected function getRandStr($length = 4)
     {
         // 密码字符集，可任意添加你需要的字符
@@ -484,15 +484,15 @@ class ProductApi extends Service
             // $str .= substr($chars, mt_rand(0, strlen($chars) – 1), 1);
             $str .= $chars[ mt_rand(0, strlen($chars) - 1) ];
         }
-        
+
         return $str;
     }
-    
+
     public function insertByShopfwItem($product, $spu, $sku, $is_deputy)
     {
         $this->checkShopfwPostDataRequireAndInt($product);
         if (!empty($this->_error)) {
-            
+
             return [
                 'code'    => 400,
                 'message' => '',
@@ -502,7 +502,7 @@ class ProductApi extends Service
         $this->_param['is_deputy'] = $is_deputy;
         $this->_param['sku'] = $sku;
         $this->_param['spu'] = $spu;
-        
+
         Yii::$service->product->addGroupAttrs($this->_param['attr_group']);
         $originUrlKey   = 'catalog/product/index';
         $saveData       = Yii::$service->product->save($this->_param, $originUrlKey);
@@ -513,7 +513,7 @@ class ProductApi extends Service
             $saveData['id'] = (string)$saveData['_id'];
             unset($saveData['_id']);
         }
-        
+
         if (is_string($saveData['name']) && $saveData['name']) {
             $saveData['name'] = unserialize($saveData['name']);
         }
@@ -535,11 +535,11 @@ class ProductApi extends Service
         if (is_string($saveData['attr_group_info']) && $saveData['attr_group_info']) {
             $saveData['attr_group_info'] = unserialize($saveData['attr_group_info']);
         }
-        
+
         return $saveData;
     }
-    
-    
+
+
     /**
      * @param $post | Array , 数组
      * 检查产品数据的必填以及数据的初始化
@@ -555,7 +555,7 @@ class ProductApi extends Service
         $model = $this->_productModel;
         if (empty($post) || !is_array($post)) {
             $this->_error[] = 'post data is empty or is not array';
-            
+
             return ;
         }
         // 产品名字：【必填】 【多语言属性】
@@ -580,7 +580,7 @@ class ProductApi extends Service
             $defaultLangAttrName = Yii::$service->fecshoplang->getDefaultLangAttrName('description');
             $this->_error[] = '[description.'.$defaultLangAttrName.'] can not empty';
         }
-        
+
         // 产品重量Kg：【必填】强制转换成float类型
         $weight     = (float)$post['weight'];
         if (!$weight && $weight !== 0) {
@@ -588,28 +588,28 @@ class ProductApi extends Service
         } else {
             $this->_param['weight'] = $weight;
         }
-        
-        
+
+
         $third_refer_url = $post['third_refer_url'];
         if (!$third_refer_url) {
             $this->_error[] = '[third_refer_url] can not empty';
         } else {
             $this->_param['third_refer_url'] = $third_refer_url;
         }
-        
+
         $third_refer_code = $post['third_refer_code'];
         if (!$third_refer_code) {
             $this->_error[] = '[third_refer_code] can not empty';
         } else {
             $this->_param['third_refer_code'] = $third_refer_code;
         }
-        
+
         $third_product_code = $post['third_product_code'];
         if ($third_product_code) {
-           
+
             $this->_param['third_product_code'] = $third_product_code;
         }
-        
+
         // 产品价格：【必填】 强制转换成float类型
         $price          = (float)$post['price'];
         if (!$price) {
@@ -738,7 +738,7 @@ class ProductApi extends Service
         if ($remark) {
             $this->_param['remark'] = $remark;
         }
-        
+
         // 选填 产品状态
         $status = $post['status'];
         $allowStatus = [$model::STATUS_ENABLE,$model::STATUS_DISABLE];
@@ -783,7 +783,7 @@ class ProductApi extends Service
         if (isset($post['brand_id']) && $post['brand_id']) {
             $this->_param['brand_id'] =  $post['brand_id'];
         }
-        
+
         // 选填 多语言
         $meta_keywords = $post['meta_keywords'];
         if (!empty($meta_keywords) && is_array($meta_keywords)) {
@@ -796,7 +796,7 @@ class ProductApi extends Service
         }
         // 属性组属性，这里没有做强制的必填判断，有值就会加入 $this->_param 中。
         $attrInfo = Yii::$service->product->getGroupAttrInfo($attr_group);
-        
+
         $attr_group_normal = [];
         if (isset($post['attr_group_normal']) && is_array($post['attr_group_normal']) && !empty($post['attr_group_normal'])) {
             $attr_group_normal = $post['attr_group_normal'];
@@ -805,7 +805,7 @@ class ProductApi extends Service
         if (isset($post['attr_group_custom']) && is_array($post['attr_group_custom']) && !empty($post['attr_group_custom'])) {
             $attr_group_custom = $post['attr_group_custom'];
         }
-        
+
         if (is_array($attrInfo) && !empty($attrInfo)) {
             foreach ($attrInfo as $attrName => $info) {
                 if ($info['attr_type'] == 'general_attr') {
@@ -816,8 +816,8 @@ class ProductApi extends Service
                 $this->_param[$attrName] = $attrVal;
                 //if (isset($post[$attrName]) && $post[$attrName]) {
                     //$attrVal = $post[$attrName];
-                    
-                    
+
+
                     /*
                     if (isset($info['display']['type']) && $info['display']['type'] === 'select') {
                         $selectArr = $info['display']['data'];
@@ -839,6 +839,6 @@ class ProductApi extends Service
         }
         //var_dump($this->_param);exit;
     }
-    
-    
+
+
 }
