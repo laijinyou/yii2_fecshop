@@ -223,7 +223,7 @@ class ProductApi extends Service
         $customAttrGroup     = Yii::$service->product->customAttrGroup;
         if (!$attr_group) {
             $this->_error[] = '[attr_group] can not empty';
-        } elseif (!isset($customAttrGroup[$attr_group])) {
+        } elseif (!isset($customAttrGroup[$attr_group]) && $attr_group != 'default') {
             $this->_error[] = '[attr_group:'.$attr_group.'] is not config is Product Service Config File';
         } else {
             $this->_param['attr_group'] = $attr_group;
