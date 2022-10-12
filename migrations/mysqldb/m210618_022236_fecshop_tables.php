@@ -14,12 +14,12 @@ class m210618_022236_fecshop_tables extends Migration
     {
         $arr = [
             "
-                ALTER TABLE `sales_flat_order` CHANGE `txn_id` `txn_id` VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'Transaction Id 支付平台唯一交易号,通过这个可以在第三方支付平台查找订单'
+                ALTER TABLE `sales_flat_order` CHANGE `txn_id` `txn_id` VARCHAR( 100 ) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'Transaction Id 支付平台唯一交易号,通过这个可以在第三方支付平台查找订单'
             ",
-           
+
         ];
-        
-        
+
+
         foreach ($arr as $sql) {
             $this->execute($sql);
         }

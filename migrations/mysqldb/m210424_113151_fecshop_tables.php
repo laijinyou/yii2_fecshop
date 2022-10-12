@@ -25,12 +25,12 @@ class m210424_113151_fecshop_tables extends Migration
                   `created_at` int(12) DEFAULT NULL COMMENT '数据第一次的创建时间',
                   PRIMARY KEY (`id`),
                   UNIQUE KEY `type` (`type`)
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
             ",
-           
+
         ];
-        
-        
+
+
         foreach ($arr as $sql) {
             $this->execute($sql);
         }

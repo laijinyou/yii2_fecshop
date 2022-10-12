@@ -8,15 +8,15 @@ class m170718_090526_fecshop_tables extends Migration
     {
         $arr = [
             "
-            ALTER TABLE `admin_role` DEFAULT CHARACTER SET utf8;
+            ALTER TABLE `admin_role` DEFAULT CHARACTER SET utf8mb4;
             "
             ,
             "
-            ALTER TABLE `admin_role_menu` DEFAULT CHARACTER SET utf8;
+            ALTER TABLE `admin_role_menu` DEFAULT CHARACTER SET utf8mb4;
             "
             ,
         ];
-    
+
         foreach ($arr as $sql) {
             $this->execute($sql);
         }

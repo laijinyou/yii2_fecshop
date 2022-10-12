@@ -14,11 +14,11 @@ class m181025_090031_fecshop_tables extends Migration
     {
         $arr = [
             "
-            DROP TABLE `admin_menu` 
+            DROP TABLE `admin_menu`
             ",
 
             "
-            DROP TABLE `admin_role_menu` 
+            DROP TABLE `admin_role_menu`
             ",
 
             "
@@ -32,7 +32,7 @@ class m181025_090031_fecshop_tables extends Migration
               `updated_at` int(11) DEFAULT NULL,
               `can_delete` int(5) DEFAULT '2' COMMENT '是否可以被删除，1代表不可以删除，2代表可以删除',
               PRIMARY KEY (`id`)
-            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=71 ;
+            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=71 ;
             ",
 
             "
@@ -114,7 +114,7 @@ class m181025_090031_fecshop_tables extends Migration
               `created_at` int(11) DEFAULT NULL,
               `updated_at` int(11) DEFAULT NULL,
               PRIMARY KEY (`id`)
-            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2029 ;
+            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=2029 ;
             ",
 
             "

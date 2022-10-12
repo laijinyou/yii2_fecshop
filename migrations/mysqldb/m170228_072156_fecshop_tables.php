@@ -18,7 +18,7 @@ class m170228_072156_fecshop_tables extends Migration
 			  `created_person` varchar(150) DEFAULT NULL,
 			  KEY `key` (`key`),
 			  PRIMARY KEY (`id`)
-			) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+			) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=12 ;
 			', "
 			INSERT INTO `admin_config` (`id`, `label`, `key`, `value`, `description`, `created_at`, `updated_at`, `created_person`) VALUES
 			(10, '11', '111', '111', '111', '2016-10-07 15:42:01', '2016-10-07 15:42:01', 'admin'),
@@ -37,7 +37,7 @@ class m170228_072156_fecshop_tables extends Migration
 			  `can_delete` int(5) DEFAULT '2' COMMENT '是否可以被删除，1代表不可以删除，2代表可以删除',
 			  KEY `url_key` (`url_key`),
 			  PRIMARY KEY (`id`)
-			) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=199 ;
+			) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=199 ;
 			", "
 			INSERT INTO `admin_menu` (`id`, `name`, `level`, `parent_id`, `url_key`, `role_key`, `created_at`, `updated_at`, `sort_order`, `can_delete`) VALUES
 			(164, '控制面板', 1, 0, '/ddd', NULL, '2016-01-15 10:21:36', '2016-01-15 10:21:36', 0, 1),
@@ -71,8 +71,8 @@ class m170228_072156_fecshop_tables extends Migration
 			", "
 			CREATE TABLE IF NOT EXISTS `admin_role` (
 			  `role_id` int(11) NOT NULL AUTO_INCREMENT,
-			  `role_name` varchar(100) CHARACTER SET utf8 DEFAULT NULL COMMENT '权限名字',
-			  `role_description` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '权限描述',
+			  `role_name` varchar(100) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '权限名字',
+			  `role_description` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '权限描述',
 			  PRIMARY KEY (`role_id`)
 			) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 			", "
@@ -168,7 +168,7 @@ class m170228_072156_fecshop_tables extends Migration
 			  PRIMARY KEY (`id`),
 			  UNIQUE KEY `username` (`username`),
 			  UNIQUE KEY `access_token` (`access_token`)
-			) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+			) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=3 ;
 			", "
 			INSERT INTO `admin_user` (`id`, `username`, `password_hash`, `password_reset_token`, `email`, `person`, `code`, `auth_key`, `status`, `created_at`, `updated_at`, `password`, `access_token`, `allowance`, `allowance_updated_at`, `created_at_datetime`, `updated_at_datetime`, `birth_date`) VALUES
 			(2, 'admin', '".'$2y$13$T5ZFrLpJdTEkAoAdnC6A/u8lh/pG.6M0qAZBo1lKE.6x6o3V6yvVG'."', NULL, '3727@qq.com', '超级管理员', '111', NULL, 1, 1468917063, 1468917063, '', NULL, NULL, NULL, '2016-01-11 09:41:52', '2016-06-26 01:40:55', NULL);
@@ -179,7 +179,7 @@ class m170228_072156_fecshop_tables extends Migration
 			  `role_id` int(11) NOT NULL,
 			  KEY `user_id` (`user_id`),
 			  PRIMARY KEY (`id`)
-			) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+			) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=8 ;
 			', '
 			INSERT INTO `admin_user_role` (`id`, `user_id`, `role_id`) VALUES
 			(1, 2, 4),
@@ -194,7 +194,7 @@ class m170228_072156_fecshop_tables extends Migration
 			  `url` text COMMENT 'URL',
 			  `url_key` varchar(150) DEFAULT NULL COMMENT '参数',
 			  PRIMARY KEY (`id`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 			", "
 
 			CREATE TABLE IF NOT EXISTS `article` (
@@ -210,7 +210,7 @@ class m170228_072156_fecshop_tables extends Migration
 			  `created_user_id` int(11) DEFAULT NULL,
 			  KEY `url_key` (`url_key`),
 			  PRIMARY KEY (`id`)
-			) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=32 ;
+			) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=32 ;
 			", "
 			INSERT INTO `article` (`id`, `url_key`, `title`, `meta_keywords`, `meta_description`, `content`, `status`, `created_at`, `updated_at`, `created_user_id`) VALUES
 			(25, '/fdsafsd', 'a:7:{s:8:\"title_en\";s:5:\"22222\";s:8:\"title_fr\";s:0:\"\";s:8:\"title_de\";s:0:\"\";s:8:\"title_es\";s:0:\"\";s:8:\"title_ru\";s:0:\"\";s:8:\"title_pt\";s:0:\"\";s:8:\"title_zh\";s:0:\"\";}', 'a:7:{s:16:\"meta_keywords_en\";s:2:\"33\";s:16:\"meta_keywords_fr\";s:0:\"\";s:16:\"meta_keywords_de\";s:0:\"\";s:16:\"meta_keywords_es\";s:0:\"\";s:16:\"meta_keywords_ru\";s:4:\"4444\";s:16:\"meta_keywords_pt\";s:0:\"\";s:16:\"meta_keywords_zh\";s:0:\"\";}', 'a:7:{s:19:\"meta_description_en\";s:17:\"<h3>32323233</h3>\";s:19:\"meta_description_fr\";s:5:\"44444\";s:19:\"meta_description_de\";s:0:\"\";s:19:\"meta_description_es\";s:0:\"\";s:19:\"meta_description_ru\";s:0:\"\";s:19:\"meta_description_pt\";s:0:\"\";s:19:\"meta_description_zh\";s:0:\"\";}', 'a:7:{s:10:\"content_en\";s:0:\"\";s:10:\"content_fr\";s:0:\"\";s:10:\"content_de\";s:0:\"\";s:10:\"content_es\";s:0:\"\";s:10:\"content_ru\";s:0:\"\";s:10:\"content_pt\";s:0:\"\";s:10:\"content_zh\";s:0:\"\";}', 2, 1469161277, 1469173934, 2),
@@ -241,7 +241,7 @@ class m170228_072156_fecshop_tables extends Migration
 			  PRIMARY KEY (`id`),
 			  KEY `email` (`email`),
 			  UNIQUE KEY `access_token` (`access_token`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 			", "
 
 			CREATE TABLE IF NOT EXISTS `customer_address` (
@@ -264,7 +264,7 @@ class m170228_072156_fecshop_tables extends Migration
 			  `is_default` int(11) NOT NULL DEFAULT '2' COMMENT '1代表是默认地址，2代表不是',
 			  PRIMARY KEY (`address_id`),
 			  KEY `customer_id` (`customer_id`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
 			", "
 			CREATE TABLE IF NOT EXISTS `ipn_message` (
@@ -273,7 +273,7 @@ class m170228_072156_fecshop_tables extends Migration
 			  `payment_status` varchar(20) DEFAULT NULL COMMENT '支付状态',
 			  `updated_at` int(11) DEFAULT NULL COMMENT '更新时间',
 			  PRIMARY KEY (`ipn_id`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
 			", "
 			CREATE TABLE IF NOT EXISTS `sales_coupon` (
@@ -292,7 +292,7 @@ class m170228_072156_fecshop_tables extends Migration
 			  `discount` int(11) DEFAULT NULL COMMENT '优惠劵的折扣，如果类型为1，这里填写的是百分比，如果类型是2，这里代表的是在总额上减少的金额，货币为美金',
 			  PRIMARY KEY (`coupon_id`),
 			  KEY `coupon_code` (`coupon_code`)
-			) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+			) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=8 ;
 			", "
 			INSERT INTO `sales_coupon` (`coupon_id`, `created_at`, `updated_at`, `created_person`, `coupon_name`, `coupon_description`, `coupon_code`, `expiration_date`, `users_per_customer`, `times_used`, `type`, `conditions`, `discount`) VALUES
 			(4, 1481629639, 1481880122, 2, NULL, NULL, 'weqwwqw', 1543593600, 4, 452, 1, 11, 10);
@@ -305,7 +305,7 @@ class m170228_072156_fecshop_tables extends Migration
 			  PRIMARY KEY (`id`),
 			  KEY `coupon_id` (`coupon_id`),
 			  KEY `customer_id` (`customer_id`)
-			) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+			) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=12 ;
 			", '
 			INSERT INTO `sales_coupon_usage` (`id`, `coupon_id`, `customer_id`, `times_used`) VALUES
 			(1, 4, 16, 2),
@@ -342,7 +342,7 @@ class m170228_072156_fecshop_tables extends Migration
 			  PRIMARY KEY (`cart_id`),
 			  KEY `customer_id` (`customer_id`),
 			  KEY `customer_email` (`customer_email`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
 			", "
 			CREATE TABLE IF NOT EXISTS `sales_flat_cart_item` (
@@ -356,7 +356,7 @@ class m170228_072156_fecshop_tables extends Migration
 			  `custom_option_sku` varchar(50) DEFAULT NULL COMMENT '产品的自定义属性',
 			  PRIMARY KEY (`item_id`),
 			  KEY `quote_id` (`cart_id`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 			", "
 
 			CREATE TABLE IF NOT EXISTS `sales_flat_order` (
@@ -418,11 +418,11 @@ class m170228_072156_fecshop_tables extends Migration
 			  PRIMARY KEY (`order_id`),
 			  KEY `customer_id` (`customer_id`),
 			  KEY `increment_id` (`increment_id`)
-			  
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 			",
 
-            "ALTER TABLE `sales_flat_order` CHANGE `order_status` `order_status` VARCHAR( 80 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '订单状态'",
+            "ALTER TABLE `sales_flat_order` CHANGE `order_status` `order_status` VARCHAR( 80 ) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '订单状态'",
             'ALTER TABLE `sales_flat_order` ADD INDEX oupload_at_order_status ( `updated_at`, `order_status`, `if_is_return_stock` )',
 
             "
@@ -447,7 +447,7 @@ class m170228_072156_fecshop_tables extends Migration
 			  `redirect_url` varchar(200) DEFAULT NULL COMMENT '产品url',
 			  PRIMARY KEY (`item_id`),
 			  KEY `order_id` (`order_id`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 			", '
 
 			CREATE TABLE IF NOT EXISTS `static_block` (
@@ -461,7 +461,7 @@ class m170228_072156_fecshop_tables extends Migration
 			  `created_user_id` int(11) DEFAULT NULL,
 			  KEY `identify` (`identify`),
 			  PRIMARY KEY (`id`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 			', "
 
 			CREATE TABLE IF NOT EXISTS `url_rewrite` (
@@ -471,8 +471,8 @@ class m170228_072156_fecshop_tables extends Migration
 			  `origin_url` varchar(255) DEFAULT NULL COMMENT '原来的url ',
 			  KEY `custom_url_key` (`custom_url_key`),
 			  PRIMARY KEY (`id`)
-			) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=52 ;
-			", 
+			) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=52 ;
+			",
 
         ];
         //  ALTER TABLE `admin_role_menu` ADD INDEX ( `created_at` )

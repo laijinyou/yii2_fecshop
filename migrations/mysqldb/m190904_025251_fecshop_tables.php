@@ -7,7 +7,7 @@ use yii\db\Migration;
  */
 class m190904_025251_fecshop_tables extends Migration
 {
-    
+
     /**
      * {@inheritdoc}
      */
@@ -32,109 +32,109 @@ class m190904_025251_fecshop_tables extends Migration
                   PRIMARY KEY (`id`),
                   UNIQUE KEY `name` (`name`),
                   UNIQUE KEY `namespace` (`namespace`)
-                ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=47 ;
+                ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=47 ;
             ";
         $this->execute($sql);
-        
+
         // 1
         $this->execute("INSERT INTO `admin_url_key` (`name`, `tag`, `tag_sort_order`, `url_key`, `created_at`, `updated_at`, `can_delete`) VALUES ('Extension Installed List', 'extension_installed', 1, '/system/extensioninstalled/manager', 1565580357, 1567160381, 1)");
-        
+
         $lastInsertId = $this->db->getLastInsertID() ;
-        
+
         $this->execute("INSERT INTO `admin_role_url_key` (`role_id`, `url_key_id`, `created_at`, `updated_at`) VALUES (4, " . $lastInsertId . ", 1567162984, 1567162984)");
-        
+
         // 2
         $this->execute("INSERT INTO `admin_url_key` (`name`, `tag`, `tag_sort_order`, `url_key`, `created_at`, `updated_at`, `can_delete`) VALUES ('Extension Installed Edit', 'extension_installed', 2, '/system/extensioninstalled/manageredit', 1565580382, 1567160392, 1)");
-        
+
         $lastInsertId = $this->db->getLastInsertID() ;
-        
+
         $this->execute("INSERT INTO `admin_role_url_key` (`role_id`, `url_key_id`, `created_at`, `updated_at`) VALUES (4, " . $lastInsertId . ", 1567162984, 1567162984)");
 
         // 3
         $this->execute("INSERT INTO `admin_url_key` (`name`, `tag`, `tag_sort_order`, `url_key`, `created_at`, `updated_at`, `can_delete`) VALUES ('Extension Installed Save', 'extension_installed', 3, '/system/extensioninstalled/managereditsave', 1565580423, 1567160400, 1)");
-        
+
         $lastInsertId = $this->db->getLastInsertID() ;
-        
+
         $this->execute("INSERT INTO `admin_role_url_key` (`role_id`, `url_key_id`, `created_at`, `updated_at`) VALUES (4, " . $lastInsertId . ", 1567162984, 1567162984)");
 
         // 4
         $this->execute("INSERT INTO `admin_url_key` (`name`, `tag`, `tag_sort_order`, `url_key`, `created_at`, `updated_at`, `can_delete`) VALUES ('Extension Installed Delete', 'extension_installed', 4, '/system/extensioninstalled/managerdelete', 1565580449, 1567160408, 1)");
-        
+
         $lastInsertId = $this->db->getLastInsertID() ;
-        
+
         $this->execute("INSERT INTO `admin_role_url_key` (`role_id`, `url_key_id`, `created_at`, `updated_at`) VALUES (4, " . $lastInsertId . ", 1567162984, 1567162984)");
 
         // 5
         $this->execute("INSERT INTO `admin_url_key` (`name`, `tag`, `tag_sort_order`, `url_key`, `created_at`, `updated_at`, `can_delete`) VALUES ('Extension Market Manager', 'extension_manager', 7, '/system/extensionmarket/manager', 1565585008, 1565586051, 1)");
-        
+
         $lastInsertId = $this->db->getLastInsertID() ;
-        
+
         $this->execute("INSERT INTO `admin_role_url_key` (`role_id`, `url_key_id`, `created_at`, `updated_at`) VALUES (4, " . $lastInsertId . ", 1567162984, 1567162984)");
 
         // 6
         $this->execute("INSERT INTO `admin_url_key` (`name`, `tag`, `tag_sort_order`, `url_key`, `created_at`, `updated_at`, `can_delete`) VALUES ('Config Extension Manager', 'extension_manager', 6, '/config/extension/manager', 1565585471, 1565586056, 1)");
-        
+
         $lastInsertId = $this->db->getLastInsertID() ;
-        
+
         $this->execute("INSERT INTO `admin_role_url_key` (`role_id`, `url_key_id`, `created_at`, `updated_at`) VALUES (4, " . $lastInsertId . ", 1567162984, 1567162984)");
 
         // 7
         $this->execute("INSERT INTO `admin_url_key` (`name`, `tag`, `tag_sort_order`, `url_key`, `created_at`, `updated_at`, `can_delete`) VALUES ('Config Extension Save', 'extension_manager', 8, '/config/extension/managersave', 1565585491, 1565585491, 1)");
-        
+
         $lastInsertId = $this->db->getLastInsertID() ;
-        
+
         $this->execute("INSERT INTO `admin_role_url_key` (`role_id`, `url_key_id`, `created_at`, `updated_at`) VALUES (4, " . $lastInsertId . ", 1567162984, 1567162984)");
 
         // 8
         $this->execute("INSERT INTO `admin_url_key` (`name`, `tag`, `tag_sort_order`, `url_key`, `created_at`, `updated_at`, `can_delete`) VALUES ('Extension Market Login', 'extension_manager', 10, '/system/extensionmarket/login', 1566614814, 1566614814, 1)");
-        
+
         $lastInsertId = $this->db->getLastInsertID() ;
-        
+
         $this->execute("INSERT INTO `admin_role_url_key` (`role_id`, `url_key_id`, `created_at`, `updated_at`) VALUES (4, " . $lastInsertId . ", 1567162984, 1567162984)");
 
         // 9
         $this->execute("INSERT INTO `admin_url_key` (`name`, `tag`, `tag_sort_order`, `url_key`, `created_at`, `updated_at`, `can_delete`) VALUES ('Extension Market Install', 'extension_manager', 10, '/system/extensionmarket/install', 1566722341, 1566722416, 1)");
-        
+
         $lastInsertId = $this->db->getLastInsertID() ;
-        
+
         $this->execute("INSERT INTO `admin_role_url_key` (`role_id`, `url_key_id`, `created_at`, `updated_at`) VALUES (4, " . $lastInsertId . ", 1567162984, 1567162984)");
 
         // 10
         $this->execute("INSERT INTO `admin_url_key` (`name`, `tag`, `tag_sort_order`, `url_key`, `created_at`, `updated_at`, `can_delete`) VALUES ('ExtensionMarket Upgrade', 'extension_manager', 11, '/system/extensionmarket/upgrade', 1566784593, 1566870378, 1)");
-        
+
         $lastInsertId = $this->db->getLastInsertID() ;
-        
+
         $this->execute("INSERT INTO `admin_role_url_key` (`role_id`, `url_key_id`, `created_at`, `updated_at`) VALUES (4, " . $lastInsertId . ", 1567162984, 1567162984)");
 
         // 11
         $this->execute("INSERT INTO `admin_url_key` (`name`, `tag`, `tag_sort_order`, `url_key`, `created_at`, `updated_at`, `can_delete`) VALUES ('Extension Market Uninstall', 'extension_manager', 12, '/system/extensionmarket/uninstall', 1566870373, 1566870373, 1)");
-        
+
         $lastInsertId = $this->db->getLastInsertID() ;
-        
+
         $this->execute("INSERT INTO `admin_role_url_key` (`role_id`, `url_key_id`, `created_at`, `updated_at`) VALUES (4, " . $lastInsertId . ", 1567162984, 1567162984)");
 
         // 12
         $this->execute("INSERT INTO `admin_url_key` (`name`, `tag`, `tag_sort_order`, `url_key`, `created_at`, `updated_at`, `can_delete`) VALUES ('Extension Gii Generate', 'extension_developer_center', 15, '/system/extensiongii/manager', 1567065890, 1567065961, 1)");
-        
+
         $lastInsertId = $this->db->getLastInsertID() ;
-        
+
         $this->execute("INSERT INTO `admin_role_url_key` (`role_id`, `url_key_id`, `created_at`, `updated_at`) VALUES (4, " . $lastInsertId . ", 1567162984, 1567162984)");
 
         // 13
         $this->execute("INSERT INTO `admin_url_key` (`name`, `tag`, `tag_sort_order`, `url_key`, `created_at`, `updated_at`, `can_delete`) VALUES ('Extension Mutil Enable', 'extension_installed', 1, '/system/extensioninstalled/managerenable', 1567162910, 1567162992, 1)");
-        
+
         $lastInsertId = $this->db->getLastInsertID() ;
-        
+
         $this->execute("INSERT INTO `admin_role_url_key` (`role_id`, `url_key_id`, `created_at`, `updated_at`) VALUES (4, " . $lastInsertId . ", 1567162984, 1567162984)");
 
         // 14
         $this->execute("INSERT INTO `admin_url_key` (`name`, `tag`, `tag_sort_order`, `url_key`, `created_at`, `updated_at`, `can_delete`) VALUES ('Extension Mutil Disable', 'extension_installed', 2, '/system/extensioninstalled/managerdisable', 1567162975, 1567162984, 1)");
-        
+
         $lastInsertId = $this->db->getLastInsertID() ;
-        
+
         $this->execute("INSERT INTO `admin_role_url_key` (`role_id`, `url_key_id`, `created_at`, `updated_at`) VALUES (4, " . $lastInsertId . ", 1567162984, 1567162984)");
 
-        
+
     }
 
     /**
@@ -145,7 +145,7 @@ class m190904_025251_fecshop_tables extends Migration
         echo "m190904_025251_fecshop_tables cannot be reverted.\n";
 
         return false;
-        
+
     }
 
     /*

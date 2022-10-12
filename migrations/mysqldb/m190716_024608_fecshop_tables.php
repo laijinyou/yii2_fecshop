@@ -66,9 +66,9 @@ class m190716_024608_fecshop_tables extends Migration
               PRIMARY KEY (`id`),
               UNIQUE KEY `sku` (`sku`,`url_key`),
               KEY `spu` (`spu`)
-            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
             ",
-            
+
             "
                 CREATE TABLE IF NOT EXISTS `category_product` (
                   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -77,14 +77,14 @@ class m190716_024608_fecshop_tables extends Migration
                   `created_at` int(11) NOT NULL,
                   PRIMARY KEY (`id`),
                   KEY `category_id` (`category_id`,`product_id`)
-                ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=233 ;
+                ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=233 ;
             ",
-            
+
             "
             ALTER TABLE  `url_rewrite` ADD  `created_at` INT( 12 ) NULL ,
             ADD  `updated_at` INT( 12 ) NULL
             ",
-            
+
             "
             CREATE TABLE IF NOT EXISTS `full_search_product` (
               `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -109,9 +109,9 @@ class m190716_024608_fecshop_tables extends Migration
               `created_at` int(12) DEFAULT NULL COMMENT '产品创建时间',
               `sync_updated_at` int(12) DEFAULT NULL COMMENT '产品同步时间',
               PRIMARY KEY (`id`)
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
             ",
-            
+
             "
             CREATE TABLE IF NOT EXISTS `category` (
               `id` int(12) NOT NULL AUTO_INCREMENT,
@@ -137,13 +137,13 @@ class m190716_024608_fecshop_tables extends Migration
               `origin_mongo_parent_id` varchar(100) DEFAULT NULL COMMENT '同步数据使用的字段：mongo中的上级分类id',
               PRIMARY KEY (`id`),
               KEY `parent_id` (`parent_id`,`menu_show`)
-            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=3 ;
             ",
-            
+
             "
                 ALTER TABLE  `product_flat` ADD  `origin_mongo_id` VARCHAR( 80 ) NULL COMMENT  'mongodb表的产品id'
             ",
-            
+
             "
                 CREATE TABLE IF NOT EXISTS `review` (
                   `id` int(12) NOT NULL AUTO_INCREMENT,
@@ -160,14 +160,14 @@ class m190716_024608_fecshop_tables extends Migration
                   `store` varchar(100) DEFAULT NULL COMMENT 'store',
                   `lang_code` varchar(20) DEFAULT NULL COMMENT '语言简码',
                   `status` int(5) DEFAULT NULL COMMENT '状态',
-                  
+
                   `audit_user` int(12) DEFAULT NULL COMMENT '评论审核用户id',
                   `audit_date` int(12) DEFAULT NULL COMMENT '评论审核时间',
                   `origin_mongo_id` varchar(50) DEFAULT NULL COMMENT 'mongodb review的id（数据同步）',
                   PRIMARY KEY (`id`),
                   KEY `product_spu` (`product_spu`,`product_id`),
                   KEY `product_sku` (`product_sku`)
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
 
             ",
@@ -179,9 +179,9 @@ class m190716_024608_fecshop_tables extends Migration
               `status` int(5) NOT NULL,
               PRIMARY KEY (`id`),
               UNIQUE KEY `email` (`email`)
-            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=2 ;
             ",
-            
+
             "
                 CREATE TABLE IF NOT EXISTS `favorite` (
                   `id` int(12) NOT NULL AUTO_INCREMENT,
@@ -191,9 +191,9 @@ class m190716_024608_fecshop_tables extends Migration
                   `updated_at` int(12) DEFAULT NULL,
                   `store` varchar(255) DEFAULT NULL,
                   PRIMARY KEY (`id`)
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
             ",
-            
+
             "
             CREATE TABLE IF NOT EXISTS `error_handler_log` (
               `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -209,9 +209,9 @@ class m190716_024608_fecshop_tables extends Migration
               `request_info` text,
               `trace_string` text,
               PRIMARY KEY (`id`)
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
             ",
-            
+
             "
                 CREATE TABLE IF NOT EXISTS `store_base_config` (
                   `id` int(12) NOT NULL AUTO_INCREMENT,
@@ -221,9 +221,9 @@ class m190716_024608_fecshop_tables extends Migration
                   `updated_at` int(12) NOT NULL,
                   PRIMARY KEY (`id`),
                   UNIQUE KEY `key` (`key`)
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
             ",
-            
+
             "
                 CREATE TABLE IF NOT EXISTS `store_domain` (
                   `id` int(12) NOT NULL AUTO_INCREMENT,
@@ -250,9 +250,9 @@ class m190716_024608_fecshop_tables extends Migration
                   `status` int(5) DEFAULT NULL COMMENT 'store状态，1为激活，2为关闭',
                   PRIMARY KEY (`id`),
                   KEY `app_name` (`app_name`)
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
             ",
-            
+
             "
                 CREATE TABLE IF NOT EXISTS `product_attribute` (
               `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -268,10 +268,10 @@ class m190716_024608_fecshop_tables extends Migration
               `created_at` int(11) DEFAULT NULL COMMENT '创建时间',
               `updated_at` int(11) DEFAULT NULL COMMENT '更新时间',
               PRIMARY KEY (`id`)
-            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=2 ;
 
             ",
-            
+
             "
                 CREATE TABLE IF NOT EXISTS `product_attribute_group` (
                   `id` int(12) NOT NULL AUTO_INCREMENT,
@@ -281,10 +281,10 @@ class m190716_024608_fecshop_tables extends Migration
                   `created_at` int(12) DEFAULT NULL COMMENT '创建时间',
                   `updated_at` int(12) DEFAULT NULL COMMENT '更新时间',
                   PRIMARY KEY (`id`)
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
             ",
-            
+
             '
             INSERT INTO `store_base_config` (`id`, `key`, `value`, `created_at`, `updated_at`) VALUES
             (2, \'service_db\', \'a:7:{s:20:"category_and_product";s:7:"mysqldb";s:16:"product_favorite";s:7:"mysqldb";s:14:"product_review";s:7:"mysqldb";s:23:"article_and_staticblock";s:7:"mysqldb";s:11:"url_rewrite";s:7:"mysqldb";s:10:"newsletter";s:7:"mysqldb";s:16:"error_handle_log";s:7:"mysqldb";}\', 1563602730, 1564392254),
@@ -297,7 +297,7 @@ class m190716_024608_fecshop_tables extends Migration
             (9, \'base_info\', \'a:3:{s:12:"default_lang";s:2:"en";s:16:"default_currency";s:3:"USD";s:13:"base_currency";s:3:"USD";}\', 1563810520, 1563810949),
             (10, \'appserver_store\', \'a:9:{s:3:"key";s:36:"fecshop.appserver.fancyecommerce.com";s:4:"lang";s:5:"en_US";s:9:"lang_name";s:7:"English";s:8:"currency";s:3:"USD";s:12:"https_enable";s:1:"1";s:21:"facebook_login_app_id";s:16:"1108618299786621";s:25:"facebook_login_app_secret";s:32:"420b56da4f4664a4d1065a1d31e5ec73";s:22:"google_login_client_id";s:72:"380372364773-qdj1seag9bh2n0pgrhcv2r5uoc58ltp3.apps.googleusercontent.com";s:26:"google_login_client_secret";s:24:"ei8RaoCDoAlIeh1nHYm0rrwO";}\', 1563872863, 1563873396),
             (11, \'appserver_store_lang\', \'a:4:{i:0;a:3:{s:12:"languageName";s:9:"Français";s:4:"code";s:2:"fr";s:8:"language";s:5:"fr_FR";}i:1;a:3:{s:12:"languageName";s:7:"English";s:4:"code";s:2:"en";s:8:"language";s:5:"en_US";}i:2;a:3:{s:12:"languageName";s:8:"Español";s:4:"code";s:2:"es";s:8:"language";s:5:"es_ES";}i:3;a:3:{s:12:"languageName";s:6:"中文";s:4:"code";s:2:"zh";s:8:"language";s:5:"zh_CN";}}\', 1563879849, 1563890840);
-             
+
 
             ',
         ];

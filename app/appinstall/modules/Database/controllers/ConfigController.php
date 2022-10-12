@@ -477,7 +477,7 @@ class ConfigController extends Controller
             'dsn' => 'mysql:host='.$host.';port='.$port.';dbname='.$database,
             'username' => $user,
             'password' => $password,
-            'charset' => 'utf8',
+            'charset' => 'utf8mb4',
         ];
         $connection = Yii::createObject($dbConfig);
         $connError = '';
