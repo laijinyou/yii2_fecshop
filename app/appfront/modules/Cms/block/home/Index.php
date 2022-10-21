@@ -1,47 +1,48 @@
 <?php
-/**
- * FecMall file.
- *
- * @link http://www.fecmall.com/
- * @copyright Copyright (c) 2016 FecMall Software LLC
- * @license http://www.fecmall.com/license/
- */
 
 namespace fecshop\app\appfront\modules\Cms\block\home;
 
 use Yii;
-/**
- * @author Terry Zhao <2358269014@qq.com>
- * @since 1.0
- */
+
 class Index extends \yii\base\BaseObject
 {
+    // This current app's name, such as appfront, apphtml5, appserver.
+    private $_appName = '';
+    // Given products' key, such as appfront_home, apphtml5_home, appserver_home.
+    private $_givenProductsKey = '';
+
+    private $_metaTitle = 'meta_title';
+    private $_metaKeywords = 'meta_keywords';
+    private $_metaDescription = 'meta_description';
+
+    // Get the last data for this current page.
     public function getLastData()
     {
+        // Get this current app's name.
+        $this->_appName = Yii::$service->helper->getAppName();
+        if (!$this->_appName) {
+            return null;
+        }
+        $this->_givenProductsKey = $this->_appName.'_home';
+
         $this->initHead();
-        // change current layout File.
-        //Yii::$service->page->theme->layoutFile = 'home.php';
+
+        // Here you can change the current layout File.
+        // Yii::$service->page->theme->layoutFile = 'home.php';
+
         return [
-            'bestFeaturedProducts'     => $this->getFeaturedProduct(),
-            'bestSellerProducts'    => $this->getBestSellerProducts(),
+            'bestFeaturedProducts' => $this->getGivenProducts('best_feature_sku'),
+            'bestSellerProducts' => $this->getGivenProducts('best_seller_sku'),
         ];
     }
 
-    public function getFeaturedProduct()
+    // Get given products by key.
+    public function getGivenProducts($key)
     {
-        $appName = Yii::$service->helper->getAppName();
-        $bestFeatureSkuConfig = Yii::$app->store->get($appName.'_home', 'best_feature_sku');
-        $featured_skus = explode(',', $bestFeatureSkuConfig);
+        $skusStr = Yii::$app->store->get($this->_givenProductsKey, $key);
+        $skusArr = explode(',', $skusStr);
 
-        return $this->getProductBySkus($featured_skus);
-    }
-
-    public function getBestSellerProducts()
-    {
-        $appName = Yii::$service->helper->getAppName();
-        $bestSellSkusConfig = Yii::$app->store->get($appName.'_home', 'best_seller_sku');
-        $bestSellSkus = explode(',', $bestSellSkusConfig);
-        return $this->getProductBySkus($bestSellSkus);
+        return $this->getProductBySkus($skusArr);
     }
 
     public function getProductBySkus($skus)
@@ -61,24 +62,27 @@ class Index extends \yii\base\BaseObject
         }
     }
 
+    // Init this current html head meta tags and values.
     public function initHead()
     {
-        $appName = Yii::$service->helper->getAppName();
-        $home_title = Yii::$app->store->get($appName.'_home', 'meta_title');
-        $appName = Yii::$service->helper->getAppName();
-        $home_meta_keywords = Yii::$app->store->get($appName.'_home', 'meta_keywords');
-        $appName = Yii::$service->helper->getAppName();
-        $home_meta_description = Yii::$app->store->get($appName.'_home', 'meta_description');
-        
+        // Get this current app's value.
+        $home_title = Yii::$app->store->get($this->_givenProductsKey, $this->_metaTitle);
+        $home_meta_keywords = Yii::$app->store->get($this->_givenProductsKey, $this->_metaKeywords);
+        $home_meta_description = Yii::$app->store->get($this->_givenProductsKey, $this->_metaDescription);
+
+        // Set the keywords meta tag in this current html.
         Yii::$app->view->registerMetaTag([
             'name' => 'keywords',
-            'content' => Yii::$service->store->getStoreAttrVal($home_meta_keywords, 'meta_keywords'),
+            'content' => Yii::$service->store->getStoreAttrVal($home_meta_keywords, $this->_metaKeywords),
         ]);
 
+        // Set the description meta tag in this current html.
         Yii::$app->view->registerMetaTag([
             'name' => 'description',
-            'content' => Yii::$service->store->getStoreAttrVal($home_meta_description, 'meta_description'),
+            'content' => Yii::$service->store->getStoreAttrVal($home_meta_description, $this->_metaDescription),
         ]);
-        Yii::$app->view->title = Yii::$service->store->getStoreAttrVal($home_title, 'meta_title');
+
+        // Set the title meta tag in this current html.
+        Yii::$app->view->title = Yii::$service->store->getStoreAttrVal($home_title, $this->_metaTitle);
     }
 }
