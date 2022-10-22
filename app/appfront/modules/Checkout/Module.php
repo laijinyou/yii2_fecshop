@@ -1,22 +1,11 @@
 <?php
-/**
- * FecShop file.
- *
- * @link http://www.fecshop.com/
- * @copyright Copyright (c) 2016 FecShop Software LLC
- * @license http://www.fecshop.com/license/
- */
 
 namespace fecshop\app\appfront\modules\Checkout;
 
 use fecshop\app\appfront\modules\AppfrontModule;
 use Yii;
 
-/**
- * @author Terry Zhao <2358269014@qq.com>
- * @since 1.0
- * Checkout Module 模块
- */
+// Checkout Module 模块
 class Module extends AppfrontModule
 {
     public $blockNamespace;
@@ -42,8 +31,7 @@ class Module extends AppfrontModule
 
         // 指定默认的man文件
         //$this->layout = "home.php";
-        // 设置该模块的view(theme)的默认layout文件。
+        // Set the default theme layout file of this current module.
         Yii::$service->page->theme->layoutFile = 'one_step_checkout.php';
-        
     }
 }

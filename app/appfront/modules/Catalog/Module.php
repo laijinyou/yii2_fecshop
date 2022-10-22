@@ -1,22 +1,11 @@
 <?php
-/**
- * FecShop file.
- *
- * @link http://www.fecshop.com/
- * @copyright Copyright (c) 2016 FecShop Software LLC
- * @license http://www.fecshop.com/license/
- */
 
 namespace fecshop\app\appfront\modules\Catalog;
 
 use fecshop\app\appfront\modules\AppfrontModule;
 use Yii;
 
-/**
- * @author Terry Zhao <2358269014@qq.com>
- * @since 1.0
- * Catalog Module 模块
- */
+// Catalog Module 模块
 class Module extends AppfrontModule
 {
     public $blockNamespace;
@@ -40,8 +29,7 @@ class Module extends AppfrontModule
         //$this->_currentDir			= 	__DIR__ ;
         //$this->_currentNameSpace	=   __NAMESPACE__;
 
-        // 设置该模块的view(theme)的默认layout文件。
-        Yii::$service->page->theme->layoutFile = 'main.php';
-        
+        // Set the default theme layout file of this current module.
+        Yii::$service->page->theme->layoutFile = 'home.php';
     }
 }

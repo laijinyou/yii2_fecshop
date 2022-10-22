@@ -29,7 +29,7 @@ class Module extends AppfrontModule
         //$this->_currentDir			= 	__DIR__ ;
         //$this->_currentNameSpace	=   __NAMESPACE__;
 
-        // 设置该模块的view(theme)的默认layout文件。
-        Yii::$service->page->theme->layoutFile = 'main.php';
+        // Set the default theme layout file of this current module.
+        Yii::$service->page->theme->layoutFile = 'home.php';
     }
 }

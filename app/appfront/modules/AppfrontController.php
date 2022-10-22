@@ -1,11 +1,4 @@
 <?php
-/**
- * FecShop file.
- *
- * @link http://www.fecshop.com/
- * @copyright Copyright (c) 2016 FecShop Software LLC
- * @license http://www.fecshop.com/license/
- */
 
 namespace fecshop\app\appfront\modules;
 
@@ -14,11 +7,7 @@ use fec\helpers\CConfig;
 use Yii;
 use yii\base\InvalidValueException;
 
-/**
- * @author Terry Zhao <2358269014@qq.com>
- * @since 1.0
- * Appfront 入口的controller的基类
- */
+// Appfront 入口的controller的基类
 class AppfrontController extends FecController
 {
     public $blockNamespace;
@@ -78,7 +67,7 @@ class AppfrontController extends FecController
         $relativeFile .= '\\'.$viewId.'\\'.ucfirst($blockName);
         //查找是否在rewriteMap中存在重写
         $relativeFile = Yii::mapGetName($relativeFile);
-        
+
         return new $relativeFile();
     }
 
@@ -100,7 +89,7 @@ class AppfrontController extends FecController
     }
 
     /**
-     * @param $view|string 
+     * @param $view|string
      * Get current layoutFile absolute path from mutil theme dir by protity.
      * 首先在高级别的模板中找view文件，如果找不到，按照模板路径优先级依次查找
      * 直到找到view'文件。
@@ -109,7 +98,7 @@ class AppfrontController extends FecController
     {
         $layoutFileStr = Yii::$service->page->theme->layoutFile;
         if (substr($layoutFileStr, 0, 1) == '@') {
-            
+
             return Yii::getAlias($layoutFileStr);
         }
         $layoutFile = '';

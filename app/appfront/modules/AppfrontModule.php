@@ -1,19 +1,8 @@
 <?php
-/**
- * FecShop file.
- *
- * @link http://www.fecshop.com/
- * @copyright Copyright (c) 2016 FecShop Software LLC
- * @license http://www.fecshop.com/license/
- */
 
 namespace fecshop\app\appfront\modules;
 
-/**
- * @author Terry Zhao <2358269014@qq.com>
- * @since 1.0
- * Appfront 入口的Module的基类
- */
+// Appfront 入口的Module的基类
 class AppfrontModule extends \yii\base\Module
 {
     /*
