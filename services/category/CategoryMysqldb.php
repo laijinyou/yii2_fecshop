@@ -1,23 +1,11 @@
 <?php
 
-/*
- * FecShop file.
- *
- * @link http://www.fecshop.com/
- * @copyright Copyright (c) 2016 FecShop Software LLC
- * @license http://www.fecshop.com/license/
- */
-
 namespace fecshop\services\category;
 
 use fecshop\models\mongodb\Category;
 use fecshop\services\Service;
 use Yii;
 
-/**
- * @author Terry Zhao <2358269014@qq.com>
- * @since 1.0
- */
 class CategoryMysqldb extends Service implements CategoryInterface
 {
     public $numPerPage = 20;
@@ -46,13 +34,15 @@ class CategoryMysqldb extends Service implements CategoryInterface
         list($this->_categoryProductModelName, $this->_categoryProductModel) = \Yii::mapGet($this->_categoryProductModelName);
     }
     
-    // 保存的数据进行serialize序列化
+    // 对请求的数据进行序列化。
     protected function serializeSaveData($one) 
     {
+        // 单一语言版本：数据不需要进行序列化。
         if (!is_array($one) && !is_object($one)) {
-            
             return $one;
         }
+
+        // 多语言版本：对分类数据中指定的字段进行序列化。
         foreach ($one as $k => $v) {
             if (in_array($k, $this->serializeAttrs)) {
                 $one[$k] = serialize($v);
@@ -61,13 +51,16 @@ class CategoryMysqldb extends Service implements CategoryInterface
         
         return $one;
     }
-    // 保存的数据进行serialize序列化
+
+    // 对响应的数据进行反序列化。
     protected function unserializeData($one) 
     {
+        // 单一语言版本：数据不需要进行反序列化。
         if (!is_array($one) && !is_object($one)) {
-            
             return $one;
         }
+
+        // 多语言版本：对分类数据中指定的字段进行反序列化。
         foreach ($one as $k => $v) {
             if (in_array($k, $this->serializeAttrs)) {
                 $one[$k] = unserialize($v);
@@ -77,9 +70,7 @@ class CategoryMysqldb extends Service implements CategoryInterface
         return $one;
     }
     
-    /**
-     * 通过主键，得到Category对象。
-     */
+    // 通过主键，得到Category对象。
     public function getByPrimaryKey($primaryKey)
     {
         if ($primaryKey) {
@@ -118,17 +109,13 @@ class CategoryMysqldb extends Service implements CategoryInterface
         }
     }
     
-    /**
-     * 返回主键。
-     */
+    // 返回主键
     public function getPrimaryKey()
     {
         return 'id';
     }
 
-    /**
-     * 得到分类激活状态的值
-     */
+    // 得到分类激活状态的值
     public function getCategoryEnableStatus()
     {
         $model = $this->_categoryModel;
@@ -136,9 +123,7 @@ class CategoryMysqldb extends Service implements CategoryInterface
         return $model::STATUS_ENABLE;
     }
 
-    /**
-     * 得到分类在menu中显示的状态值
-     */
+    // 得到分类在menu中显示的状态值
     public function getCategoryMenuShowStatus()
     {
         $model = $this->_categoryModel;

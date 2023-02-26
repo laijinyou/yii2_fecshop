@@ -1,21 +1,10 @@
 <?php
-/**
- * FecShop file.
- *
- * @link http://www.fecshop.com/
- * @copyright Copyright (c) 2016 FecShop Software LLC
- * @license http://www.fecshop.com/license/
- */
 
 namespace fecshop\app\appfront\modules\Catalog\block\category;
 
 use Yii;
 use yii\base\InvalidValueException;
 
-/**
- * @author Terry Zhao <2358269014@qq.com>
- * @since 1.0
- */
 class Index extends \yii\base\BaseObject
 {
     // 当前分类对象
@@ -52,7 +41,9 @@ class Index extends \yii\base\BaseObject
         parent::init();
         $this->getQuerySort();
     }
+
     protected $_sort_items;
+
     public function getQuerySort()
     {
         if (!$this->_sort_items) {
@@ -79,14 +70,11 @@ class Index extends \yii\base\BaseObject
         // 每页显示的产品个数，进行安全验证，如果个数不在预先设置的值内，则会报错。
         // 这样是为了防止恶意攻击，也就是发送很多不同的页面个数的链接，绕开缓存。
         $this->getNumPerPage();
-        //echo Yii::$service->page->translate->__('fecshop,{username}', ['username' => 'terry']);
+        
         if(!$this->initCategory()){
             Yii::$service->url->redirect404();
             return;
         }
-        
-        // change current layout File.
-        //Yii::$service->page->theme->layoutFile = 'home.php';
 
         $productCollInfo = $this->getCategoryProductColl();
         $products = $productCollInfo['coll'];
@@ -113,9 +101,7 @@ class Index extends \yii\base\BaseObject
         ];
     }
 
-    /**
-     * 得到子分类，如果子分类不存在，则返回同级分类。
-     */
+    // 得到子分类，如果子分类不存在，则返回同级分类。
     protected function getFilterCategory()
     {
         $category_id = $this->_primaryVal;
@@ -276,12 +262,10 @@ class Index extends \yii\base\BaseObject
      */
     protected function getFilterAttr()
     {
-        
         return Yii::$service->category->getFilterAttr($this->_category);
     }
-    /**
-     * 得到分类侧栏用于属性过滤的部分数据
-     */
+    
+    // 得到分类侧栏用于属性过滤的部分数据。
     protected function getRefineByInfo()
     {
         $get_arr = Yii::$app->request->get();
@@ -329,9 +313,7 @@ class Index extends \yii\base\BaseObject
         return $refineInfo;
     }
     
-    /**
-     * 侧栏价格过滤部分
-     */
+    // 侧栏价格过滤部分。
     protected function getFilterPrice()
     {
         $filter = [];
@@ -354,9 +336,8 @@ class Index extends \yii\base\BaseObject
 
         return $filter;
     }
-    /**
-     * 格式化价格格式，侧栏价格过滤部分
-     */
+    
+    // 格式化价格格式，侧栏价格过滤部分。
     protected function getFormatFilterPrice($price_item)
     {
         list($f_price, $l_price) = explode('-', $price_item);
@@ -441,18 +422,16 @@ class Index extends \yii\base\BaseObject
 
         return $this->_numPerPageVal;
     }
-    /**
-     * 得到当前第几页
-     */
+    
+    // 得到当前第几页
     protected function getPageNum()
     {
         $numPerPage = Yii::$app->request->get($this->_page);
 
         return $numPerPage ? (int) $numPerPage : 1;
     }
-    /**
-     * 得到当前分类的产品
-     */
+    
+    // 得到当前分类的产品
     protected function getCategoryProductColl()
     {
         $productPrimaryKey = Yii::$service->product->getPrimaryKey();
@@ -477,9 +456,8 @@ class Index extends \yii\base\BaseObject
         //var_dump($filter);exit;
         return Yii::$service->category->product->getFrontList($filter);
     }
-    /**
-     * 得到用于查询的where数组。
-     */
+    
+    // 得到用于查询的where数组。
     protected function initWhere()
     {
         $filterAttr = $this->getFilterAttr();

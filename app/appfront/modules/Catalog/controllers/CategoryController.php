@@ -1,21 +1,10 @@
 <?php
-/**
- * FecShop file.
- *
- * @link http://www.fecshop.com/
- * @copyright Copyright (c) 2016 FecShop Software LLC
- * @license http://www.fecshop.com/license/
- */
 
 namespace fecshop\app\appfront\modules\Catalog\controllers;
 
 use fecshop\app\appfront\modules\AppfrontController;
 use Yii;
 
-/**
- * @author Terry Zhao <2358269014@qq.com>
- * @since 1.0
- */
 class CategoryController extends AppfrontController
 {
     public function init()
@@ -33,7 +22,8 @@ class CategoryController extends AppfrontController
         }
     }
     /**
-     * Yii2 behaviors 可以参看地址：http://www.yiichina.com/doc/guide/2.0/concept-behaviors
+     * Yii2 behaviors 
+     * 可以参看地址：http://www.yiichina.com/doc/guide/2.0/concept-behaviors
      * 这里的行为的作用为添加page cache（整页缓存）。
      */
     public function behaviors()

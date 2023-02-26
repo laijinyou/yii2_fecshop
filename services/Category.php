@@ -1,26 +1,14 @@
 <?php
 
-/*
- * FecShop file.
- *
- * @link http://www.fecshop.com/
- * @copyright Copyright (c) 2016 FecShop Software LLC
- * @license http://www.fecshop.com/license/
- */
-
 namespace fecshop\services;
 
 use Yii;
 /**
- * Category service.
- *
  * @method coll($filters = [])
  * @see \fecshop\services\Category::actionColl()
  * @method getCategoryEnableStatus()
  * @see \fecshop\services\Category::actionGetCategoryEnableStatus()
  *
- * @author Terry Zhao <2358269014@qq.com>
- * @since 1.0
  */
 class Category extends Service
 {
@@ -100,17 +88,14 @@ class Category extends Service
         return $this->_category->getCategoryMenuShowStatus();
     }
 
-    /**
-     * 得到当前的category service 对应的主键名称，譬如如果是mongo，返回的是 _id.
-     */
+    // 得到当前的category service 对应的主键名称。
+    // 譬如如果是mongo，返回的是 _id。
     public function getPrimaryKey()
     {
         return $this->_category->getPrimaryKey();
     }
 
-    /**
-     * 得到category model的全名.
-     */
+    // 得到category model的全名
     public function getModelName()
     {
         return get_class($this->_category->getByPrimaryKey());

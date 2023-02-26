@@ -1,26 +1,18 @@
 <?php
 
-/*
- * FecShop file.
- *
- * @link http://www.fecshop.com/
- * @copyright Copyright (c) 2016 FecShop Software LLC
- * @license http://www.fecshop.com/license/
- */
-
 namespace fecshop\services\category;
 
-/**
- * @author Terry Zhao <2358269014@qq.com>
- * @since 1.0
- */
 interface CategoryInterface
 {
+    // 通过主键获取分类
     public function getByPrimaryKey($primaryKey);
 
+    // 查询
     public function coll($filter);
 
+    // 保存
     public function save($one, $originUrlKey);
 
+    // 删除
     public function remove($ids);
 }
