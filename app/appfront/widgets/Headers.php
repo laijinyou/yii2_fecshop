@@ -12,8 +12,6 @@ class Headers implements BlockCache
         $currentUrl = Yii::$service->url->getCurrentUrl();
         $logoutUrl = Yii::$service->url->getUrl('customer/account/logout', ['rt'=>base64_encode($currentUrl)]);
 
-        
-        
         return [
             'logoutUrl'             => $logoutUrl,
             'homeUrl'               => Yii::$service->url->homeUrl(),
@@ -35,6 +33,5 @@ class Headers implements BlockCache
         $cacheKeyName   = 'footer';
         $currentStore   = Yii::$service->store->currentStore;
         return self::BLOCK_CACHE_PREFIX.'_'.$currentStore.'_'.$lang.'_'.$currency.'_'.$appName.'_'.$cacheKeyName;
-    }
-    
+    }    
 }

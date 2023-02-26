@@ -5,7 +5,6 @@ namespace fecshop\app\appfront\modules\Catalog;
 use fecshop\app\appfront\modules\AppfrontModule;
 use Yii;
 
-// Catalog Module 模块
 class Module extends AppfrontModule
 {
     public $blockNamespace;

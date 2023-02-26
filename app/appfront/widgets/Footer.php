@@ -9,9 +9,7 @@ class Footer implements BlockCache
 {
     public function getLastData()
     {
-        return [
-
-        ];
+        return [];
     }
 
     public function getCacheKey()
