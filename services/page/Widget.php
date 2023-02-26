@@ -1,13 +1,5 @@
 <?php
 
-/*
- * FecShop file.
- *
- * @link http://www.fecshop.com/
- * @copyright Copyright (c) 2016 FecShop Software LLC
- * @license http://www.fecshop.com/license/
- */
-
 namespace fecshop\services\page;
 
 use fec\helpers\CCache;
@@ -17,11 +9,7 @@ use Yii;
 use yii\base\InvalidConfigException;
 use yii\base\InvalidValueException;
 
-/**
- * Page widget services.
- * @author Terry Zhao <2358269014@qq.com>
- * @since 1.0
- */
+// Page widget services
 class Widget extends Service
 {
     public $defaultObMethod = 'getLastData';

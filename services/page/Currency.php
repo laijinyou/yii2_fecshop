@@ -1,24 +1,11 @@
 <?php
 
-/*
- * FecShop file.
- *
- * @link http://www.fecshop.com/
- * @copyright Copyright (c) 2016 FecShop Software LLC
- * @license http://www.fecshop.com/license/
- */
-
 namespace fecshop\services\page;
 
 use fecshop\services\Service;
 use Yii;
 use yii\base\InvalidConfigException;
 
-/**
- * Page Currency services 货币部分
- * @author Terry Zhao <2358269014@qq.com>
- * @since 1.0
- */
 class Currency extends Service
 {
     const CURRENCY_CURRENT = 'currency_current';

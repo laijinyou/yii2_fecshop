@@ -1,24 +1,11 @@
 <?php
 
-/*
- * FecShop file.
- *
- * @link http://www.fecshop.com/
- * @copyright Copyright (c) 2016 FecShop Software LLC
- * @license http://www.fecshop.com/license/
- */
-
 namespace fecshop\services\page;
 
 use fec\helpers\CUrl;
 use fecshop\services\Service;
 use Yii;
 
-/**
- * Page Menu services.
- * @author Terry Zhao <2358269014@qq.com>
- * @since 1.0
- */
 class Menu extends Service
 {
     /**
@@ -107,9 +94,7 @@ class Menu extends Service
         return $cMenu;
     }
 
-    /**
-     * get product category array as menu.
-     */
+    // get product category array as menu
     protected function getProductCategoryMenu()
     {
         return Yii::$service->category->menu->getCategoryMenuArr();

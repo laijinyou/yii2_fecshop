@@ -1,23 +1,11 @@
 <?php
 
-/*
- * FecShop file.
- *
- * @link http://www.fecshop.com/
- * @copyright Copyright (c) 2016 FecShop Software LLC
- * @license http://www.fecshop.com/license/
- */
-
 namespace fecshop\services\page;
 
 use fecshop\services\Service;
 use Yii;
 
-/**
- * page Footer services.
- * @author Terry Zhao <2358269014@qq.com>
- * @since 1.0
- */
+// page Footer services.
 class Trace extends Service
 {
     public $traceJsEnable = false;  // 是否打开js追踪
