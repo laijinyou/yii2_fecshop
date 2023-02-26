@@ -1,11 +1,5 @@
 <?php
-/**
- * FecShop file.
- *
- * @link http://www.fecshop.com/
- * @copyright Copyright (c) 2016 FecShop Software LLC
- * @license http://www.fecshop.com/license/
- */
+
 /**
  * 本文件在@appfront/web/index.php 处，会被引入。
  * 该配置文件会加载./modules/*.php，并合并成一个数组，返回。

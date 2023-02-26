@@ -1,23 +1,11 @@
 <?php
 
-/*
- * FecShop file.
- *
- * @link http://www.fecshop.com/
- * @copyright Copyright (c) 2016 FecShop Software LLC
- * @license http://www.fecshop.com/license/
- */
-
 namespace fecshop\services\category;
 
 use fecshop\services\Service;
 use Yii;
 
-/**
- * 分类图片的一些处理。
- * @author Terry Zhao <2358269014@qq.com>
- * @since 1.0
- */
+// 分类图片的一些处理。
 class Image extends Service
 {
     /**

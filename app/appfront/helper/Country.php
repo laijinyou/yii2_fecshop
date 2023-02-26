@@ -1,20 +1,9 @@
 <?php
-/**
- * FecShop file.
- *
- * @link http://www.fecshop.com/
- * @copyright Copyright (c) 2016 FecShop Software LLC
- * @license http://www.fecshop.com/license/
- */
 
 namespace fecshop\app\appfront\helper;
 
 use Yii;
 
-/**
- * @author Terry Zhao <2358269014@qq.com>
- * @since 1.0
- */
 class Country extends \yii\base\BaseObject
 {
     /**废弃    

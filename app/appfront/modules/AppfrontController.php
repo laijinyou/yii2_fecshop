@@ -20,21 +20,18 @@ class AppfrontController extends FecController
     public function init()
     {
         parent::init();
-        /**
-         * 如果模板路径没有配置，则配置模板路径
-         */
+        
+        // 如果模板路径没有配置，则配置模板路径.
         if (!Yii::$service->page->theme->fecshopThemeDir) {
             Yii::$service->page->theme->fecshopThemeDir = Yii::getAlias(CConfig::param('appfrontBaseTheme'));
         }
-        /**
-         * 如果layout文件没有配置，则配置layout文件
-         */
+        
+        // 如果layout文件没有配置，则配置layout文件.
         if (!Yii::$service->page->theme->layoutFile) {
             Yii::$service->page->theme->layoutFile = CConfig::param('appfrontBaseLayoutName');
         }
-        /*
-         *  set i18n translate category.
-         */
+        
+        // set i18n translate category.
         Yii::$service->page->translate->category = 'appfront';
         /*
          * 自定义Yii::$classMap,用于重写

@@ -1,11 +1,5 @@
 <?php
-/**
- * FecShop file.
- *
- * @link http://www.fecshop.com/
- * @copyright Copyright (c) 2016 FecShop Software LLC
- * @license http://www.fecshop.com/license/
- */
+
 return [
     /**
      * Site 模块的配置，您可以在@appfront/config/fecshop_local_modules/Site.php 
@@ -13,11 +7,7 @@ return [
      */
     'site' => [
         'class' => '\fecshop\app\appfront\modules\Site\Module',
-        /**
-         * 模块内部的params配置。
-         */
-        'params'=> [
-        
-        ],
+        // 模块内部的params配置。
+        'params'=> [],
     ],
 ];

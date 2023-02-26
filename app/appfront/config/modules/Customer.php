@@ -1,11 +1,5 @@
 <?php
-/**
- * FecShop file.
- *
- * @link http://www.fecshop.com/
- * @copyright Copyright (c) 2016 FecShop Software LLC
- * @license http://www.fecshop.com/license/
- */
+
 return [
     /**
      * Customer 模块的配置，您可以在@appfront/config/fecshop_local_modules/Customer.php 
