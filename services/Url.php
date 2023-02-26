@@ -1,26 +1,14 @@
 <?php
 
-/*
- * FecShop file.
- *
- * @link http://www.fecshop.com/
- * @copyright Copyright (c) 2016 FecShop Software LLC
- * @license http://www.fecshop.com/license/
- */
-
 namespace fecshop\services;
 
 use Yii;
 
 /**
- * Url Services
  *
  * @property \fecshop\services\url\Category $category category sub-service of url
  * @property \fecshop\services\url\Rewrite $rewrite rewrite sub-service of url
  *
- * Url Service
- * @author Terry Zhao <2358269014@qq.com>
- * @since 1.0
  */
 class Url extends Service
 {

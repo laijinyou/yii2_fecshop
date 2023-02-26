@@ -1,13 +1,5 @@
 <?php
 
-/*
- * FecShop file.
- *
- * @link http://www.fecshop.com/
- * @copyright Copyright (c) 2016 FecShop Software LLC
- * @license http://www.fecshop.com/license/
- */
-
 namespace fecshop\services\url\rewrite;
 
 //use fecshop\models\mongodb\url\UrlRewrite;
@@ -15,11 +7,6 @@ use Yii;
 use fecshop\services\Service;
 use yii\base\InvalidValueException;
 
-/**
- * Url Rewrite RewriteMongodb service
- * @author Terry Zhao <2358269014@qq.com>
- * @since 1.0
- */
 class RewriteMongodb extends Service implements RewriteInterface
 {
     public $numPerPage = 20;

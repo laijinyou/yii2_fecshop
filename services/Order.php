@@ -1,13 +1,5 @@
 <?php
 
-/*
- * FecShop file.
- *
- * @link http://www.fecmall.com/
- * @copyright Copyright (c) 2016 FecShop Software LLC
- * @license http://www.fecmall.com/license/
- */
-
 namespace fecshop\services;
 
 use Yii;

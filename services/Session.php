@@ -1,13 +1,5 @@
 <?php
 
-/*
- * FecShop file.
- *
- * @link http://www.fecshop.com/
- * @copyright Copyright (c) 2016 FecShop Software LLC
- * @license http://www.fecshop.com/license/
- */
-
 namespace fecshop\services;
 
 use Yii;
@@ -18,11 +10,6 @@ use fecshop\services\session\SessionPhp;
 //use fecshop\services\session\SessionMysqldb;
 //use fecshop\services\session\SessionRedis;
 
-/**
- * Session services.
- * @author Terry Zhao <2358269014@qq.com>
- * @since 1.0
- */
 class Session extends Service
 {
     // 设置session超时时间

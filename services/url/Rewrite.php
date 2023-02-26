@@ -1,24 +1,12 @@
 <?php
 
-/*
- * FecShop file.
- *
- * @link http://www.fecshop.com/
- * @copyright Copyright (c) 2016 FecShop Software LLC
- * @license http://www.fecshop.com/license/
- */
-
 namespace fecshop\services\url;
 
 use fecshop\services\Service;
 use fecshop\services\url\rewrite\RewriteMongodb;
 use fecshop\services\url\rewrite\RewriteMysqldb;
 use Yii;
-/**
- * Url Rewrite services.
- * @author Terry Zhao <2358269014@qq.com>
- * @since 1.0
- */
+
 class Rewrite extends Service
 {
     /**
