@@ -1,24 +1,12 @@
 <?php
 
-/*
- * FecShop file.
- *
- * @link http://www.fecshop.com/
- * @copyright Copyright (c) 2016 FecShop Software LLC
- * @license http://www.fecshop.com/license/
- */
-
 namespace fecshop\services\page;
 
 use Yii;
 use fec\helpers\CUrl;
 use fecshop\services\Service;
 
-/**
- * Page Breadcrumbs services. 面包屑导航
- * @author Terry Zhao <2358269014@qq.com>
- * @since 1.0
- */
+// 面包屑导航
 class Breadcrumbs extends Service
 {
     public $homeName = 'Home';
@@ -63,13 +51,10 @@ class Breadcrumbs extends Service
     {
         if ($this->active) {
             if (is_array($this->_items) && !empty($this->_items)) {
-                
                 return $this->_items;
             } else {
-                
                 return [];
             }
         }
     }
-
 }
