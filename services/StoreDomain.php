@@ -89,6 +89,7 @@ class StoreDomain extends Service
             'count'=> $query->limit(null)->offset(null)->count(),
         ];
     }
+    
     // 通过appName得到相应的store配置数组
     public function getCollByAppName($app_name)
     {

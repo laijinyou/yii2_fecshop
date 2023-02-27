@@ -36,7 +36,8 @@ class Helper extends Service
     }
     
     /**
-     * 得到当前的app入口的名字，譬如 appfront apphtml5  appserver等.
+     * 得到当前的app入口的名字。
+     * 譬如 appfront apphtml5  appserver等。
      */
     public function getAppName()
     {

@@ -72,12 +72,18 @@ class Store extends Service
         }
     }
 
+    /**
+     * 判断是否为 appserver 入口。
+     * 
+     * @return boolean
+     */
     public function isAppserver()
     {
         $appServerArr = ['appserver'];
         $currentAppName = $this->getCurrentAppName();
+
+        // 检查数组中是否存在某个值。
         if (in_array($currentAppName, $appServerArr)) {
-            
             return true;
         }
 
@@ -85,21 +91,26 @@ class Store extends Service
     }
 
     /**
-     * 得到当前入口的名字
+     * 获取当前app入口的名称。
      * @return mixed
      */
     public function getCurrentAppName()
     {
         return Yii::$service->helper->getAppName();
     }
-    // 初始化store配置
+
+    // 初始化当前 store 配置。
     public function initCurrentStoreConfig()
     {
+        // 获取当前app入口的名称。
         $currentAppName = $this->getCurrentAppName();
+
+        // 如果是 appserver 入口。
         if ($this->isAppserver()) {
-            
             return $this->initAppserverCurrentStoreConfig();
         }
+
+        // 
         $coll = Yii::$service->storeDomain->getCollByAppName($currentAppName);
         if (is_array($coll)) {
             foreach ($coll as $one) {
@@ -160,6 +171,7 @@ class Store extends Service
 
         return true;
     }
+    
     // 如果入口是appserver，那么通过这个函数初始化
     public function initAppserverCurrentStoreConfig()
     {
@@ -348,7 +360,9 @@ class Store extends Service
     }
 
     /**
-     * @return boolean, 检测是否属于满足跳转到appserver的条件
+     * 检测是否属于满足跳转到appserver的条件。
+     * 
+     * @return boolean
      */
     public function isAppServerMobile()
     {
@@ -428,7 +442,7 @@ class Store extends Service
 
     /**
      * @return array
-     *               get all store info, one item in array format is: ['storeCode' => 'store language'].
+     *  get all store info, one item in array format is: ['storeCode' => 'store language'].
      */
     public function getStoresLang()
     {
