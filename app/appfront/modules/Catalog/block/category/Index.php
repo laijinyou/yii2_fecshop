@@ -50,14 +50,14 @@ class Index extends \yii\base\BaseObject
             $category_sorts = Yii::$app->store->get('category_sort');
             if (is_array($category_sorts)) {
                 foreach ($category_sorts as $one) {
-                    $sort_key = $one['sort_key'];
-                    $sort_label = $one['sort_label'];
+                    $sort_key        = $one['sort_key'];
+                    $sort_label      = $one['sort_label'];
                     $sort_db_columns = $one['sort_db_columns'];
-                    $sort_direction = $one['sort_direction'];
+                    $sort_direction  = $one['sort_direction'];
                     $this->_sort_items[$sort_key] = [
-                        'label'        => $sort_label,
-                        'db_columns'   => $sort_db_columns,
-                        'direction'    => $sort_direction,
+                        'label'      => $sort_label,
+                        'db_columns' => $sort_db_columns,
+                        'direction'  => $sort_direction,
                     ];
                 }
             }
@@ -76,36 +76,33 @@ class Index extends \yii\base\BaseObject
             return;
         }
 
-        $productCollInfo = $this->getCategoryProductColl();
-        $products = $productCollInfo['coll'];
+        $productCollInfo     = $this->getCategoryProductColl();
+        $products            = $productCollInfo['coll'];
         $this->_productCount = $productCollInfo['count'];
         //echo $this->_productCount;
         return [
-            'title'                 => $this->_title,
-            'name'                  => Yii::$service->store->getStoreAttrVal($this->_category['name'], 'name'),
-            'name_default_lang'     => Yii::$service->fecshoplang->getDefaultLangAttrVal($this->_category['name'], 'name'),
-            'image'                 => $this->_category['image'] ? Yii::$service->category->image->getUrl($this->_category['image']) : '',
-            'description'           => Yii::$service->store->getStoreAttrVal($this->_category['description'], 'description'),
-            'products'              => $products,
-            'product_count'              => $this->_productCount,
-            'query_item'            => $this->getQueryItem(),
-            'product_page'          => $this->getProductPage(),
-            'product_mini_page'   => $this->getProductMiniPage(),
-            'refine_by_info'        => $this->getRefineByInfo(),
-            'filter_info'           => Yii::$service->category->getFilterInfo($this->_category, $this->_where),
-            'filter_price'          => $this->getFilterPrice(),
-            'filter_category'       => $this->getFilterCategoryHtml(),
-            'categoryM' => $this->_category,
-            //'content' => Yii::$service->store->getStoreAttrVal($this->_category['content'],'content'),
-            //'created_at' => $this->_category['created_at'],
+            'name'              => Yii::$service->store->getStoreAttrVal($this->_category['name'], 'name'),
+            'name_default_lang' => Yii::$service->fecshoplang->getDefaultLangAttrVal($this->_category['name'], 'name'),
+            'image'             => $this->_category['image'] ? Yii::$service->category->image->getUrl($this->_category['image']) : '',
+            'description'       => Yii::$service->store->getStoreAttrVal($this->_category['description'], 'description'),
+            'products'          => $products,
+            'product_count'     => $this->_productCount,
+            'query_item'        => $this->getQueryItem(),
+            'product_page'      => $this->getProductPage(),
+            'product_mini_page' => $this->getProductMiniPage(),
+            'refine_by_info'    => $this->getRefineByInfo(),
+            'filter_info'       => Yii::$service->category->getFilterInfo($this->_category, $this->_where),
+            'filter_price'      => $this->getFilterPrice(),
+            'filter_category'   => $this->getFilterCategoryHtml(),
+            'categoryM'         => $this->_category,
         ];
     }
 
     // 得到子分类，如果子分类不存在，则返回同级分类。
     protected function getFilterCategory()
     {
-        $category_id = $this->_primaryVal;
-        $parent_id = $this->_category['parent_id'];
+        $category_id     = $this->_primaryVal;
+        $parent_id       = $this->_category['parent_id'];
         $filter_category = Yii::$service->category->getFilterCategory($category_id, $parent_id);
 
         return $filter_category;
@@ -127,8 +124,8 @@ class Index extends \yii\base\BaseObject
         if (is_array($filter_category) && !empty($filter_category)) {
             $str .= '<ul>';
             foreach ($filter_category as $cate) {
-                $name = Yii::$service->store->getStoreAttrVal($cate['name'], 'name');
-                $url = Yii::$service->url->getUrl($cate['url_key']);
+                $name    = Yii::$service->store->getStoreAttrVal($cate['name'], 'name');
+                $url     = Yii::$service->url->getUrl($cate['url_key']);
                 $current = '';
                 if (isset($cate['current']) && $cate['current']) {
                     $current = 'class="current"';
@@ -155,13 +152,13 @@ class Index extends \yii\base\BaseObject
         $productCount = $this->_productCount;
         $pageNum = $this->getPageNum();
         $config = [
-            'class'        => 'fecshop\app\appfront\widgets\Page',
+            'class'       => 'fecshop\app\appfront\widgets\Page',
             'view'        => 'widgets/page_mini.php',
-            'method'    => 'getMiniBar',
-            'pageNum'        => $pageNum,
-            'numPerPage'    => $productNumPerPage,
-            'countTotal'    => $productCount,
-            'page'            => $this->_page,
+            'method'      => 'getMiniBar',
+            'pageNum'     => $pageNum,
+            'numPerPage'  => $productNumPerPage,
+            'countTotal'  => $productCount,
+            'page'        => $this->_page,
         ];
 
         return Yii::$service->page->widget->renderContent('category_product_page', $config);
@@ -397,8 +394,10 @@ class Index extends \yii\base\BaseObject
     protected function getNumPerPage()
     {
         if (!$this->_numPerPageVal) {
+            // 获取url的请求参数，每页产品个数。
             $numPerPage = Yii::$app->request->get($this->_numPerPage);
             //$category_query_config = Yii::$app->getModule('catalog')->params['category_query'];
+            // 获取当前app入口，即appfront。
             $appName = Yii::$service->helper->getAppName();
             $categoryConfigNumPerPage = Yii::$app->store->get($appName.'_catalog','category_query_numPerPage');
             $category_query_config['numPerPage'] = explode(',',$categoryConfigNumPerPage);
@@ -426,8 +425,9 @@ class Index extends \yii\base\BaseObject
     // 得到当前第几页
     protected function getPageNum()
     {
+        // 获取url的请求参数p的值。
         $numPerPage = Yii::$app->request->get($this->_page);
-
+        // p有值就是p，没有值默认为第一页。
         return $numPerPage ? (int) $numPerPage : 1;
     }
     
@@ -447,10 +447,10 @@ class Index extends \yii\base\BaseObject
             }
         }
         $filter = [
-            'pageNum'      => $this->getPageNum(),
+            'pageNum'     => $this->getPageNum(),
             'numPerPage'  => $this->getNumPerPage(),
-            'orderBy'      => $this->getOrderBy(),
-            'where'          => $this->_where,
+            'orderBy'     => $this->getOrderBy(),
+            'where'       => $this->_where,
             'select'      => $select,
         ];
         //var_dump($filter);exit;
@@ -481,39 +481,50 @@ class Index extends \yii\base\BaseObject
         //var_dump($where);exit;
         return $where;
     }
-    /**
-     * 分类部分的初始化
-     * 对一些属性进行赋值。
-     */
+    
+    // 分类部分的初始化，对一些属性进行赋值。
     protected function initCategory()
     {
+        // 获取分类的主键
         $primaryKey = Yii::$service->category->getPrimaryKey();
+        // 获取请求对分类的主键的值。
         $primaryVal = Yii::$app->request->get($primaryKey);
+        // 全局共享数据。
         $this->_primaryVal = $primaryVal;
+        // 通过主键获取分类信息。
         $category = Yii::$service->category->getByPrimaryKey($primaryVal);
+        // 该主键分类不存在或状态为不显示的情况。
         if ($category) {
             $enableStatus = Yii::$service->category->getCategoryEnableStatus();
-            if ($category['status'] != $enableStatus){
-                
+            if ($category['status'] != $enableStatus) {
                 return false;
             }
         } else {
-            
             return false;
         }
+        // 全局共享数据。
         $this->_category = $category;
+
+        // 设置当前语言的页面关键词。
         Yii::$app->view->registerMetaTag([
             'name' => 'keywords',
             'content' => Yii::$service->store->getStoreAttrVal($category['meta_keywords'], 'meta_keywords'),
         ]);
+        // 设置当前语言的页面描述。
         Yii::$app->view->registerMetaTag([
             'name' => 'description',
             'content' => Yii::$service->store->getStoreAttrVal($category['meta_description'], 'meta_description'),
         ]);
+
+        // 获取当前语言的页面标题。
         $this->_title = Yii::$service->store->getStoreAttrVal($category['title'], 'title');
+
+        // 获取当前语言的分类名称。
         $name = Yii::$service->store->getStoreAttrVal($category['name'], 'name');
+        // 设置面包屑
         $this->breadcrumbs($name);
         $this->_title = $this->_title ? $this->_title : $name;
+        // 设置当前语言的页面标题。
         Yii::$app->view->title = $this->_title;
         $this->_where = $this->initWhere();
         return true;
@@ -522,7 +533,9 @@ class Index extends \yii\base\BaseObject
     // 面包屑导航
     protected function breadcrumbs($name)
     {
+        // 获取app入口名称
         $appName = Yii::$service->helper->getAppName();
+        // 获取相应的面包屑缓存
         $category_breadcrumbs = Yii::$app->store->get($appName.'_catalog','category_breadcrumbs');
         
         if ($category_breadcrumbs == Yii::$app->store->enable) {
