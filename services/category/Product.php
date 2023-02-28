@@ -1,23 +1,11 @@
 <?php
 
-/*
- * FecShop file.
- *
- * @link http://www.fecshop.com/
- * @copyright Copyright (c) 2016 FecShop Software LLC
- * @license http://www.fecshop.com/license/
- */
-
 namespace fecshop\services\category;
 
 use fecshop\services\Service;
 use Yii;
 
-/**
- * 分类对应的产品的一些操作。
- * @author Terry Zhao <2358269014@qq.com>
- * @since 1.0
- */
+// 分类对应的产品的一些操作
 class Product extends Service
 {
     public $pageNum = 1;
@@ -86,66 +74,62 @@ class Product extends Service
         ];
     }
 
-    /**
-     * 将service取出来的数据，处理一下，然后前端显示。
-     */
+    // 将service取出来的数据，处理一下，然后前端显示。
     public function convertToCategoryInfo($collection)
     {
         $arr = [];
-        $defaultImg = Yii::$service->product->image->defautImg();
         if (is_array($collection) && !empty($collection)) {
             foreach ($collection as $one) {
+                // 产品id
+                $primary_key = Yii::$service->product->getPrimaryKey();
+                $_id = (string)$one[$primary_key];
+
+                // 产品名称
                 if (is_array($one['name']) && !empty($one['name'])) {
+                    // 多语言
                     $name = Yii::$service->store->getStoreAttrVal($one['name'], 'name');
                 } else {
+                    // 单语言
                     $name = $one['name'];
                 }
+
+                // 封面图片
                 $image = $one['image'];
-                $url_key = $one['url_key'];
                 if (isset($image['main']['image']) && !empty($image['main']['image'])) {
                     $image = $image['main']['image'];
                 } else {
-                    $image = $defaultImg;
+                    // 产品没有封面图片的时候显示默认图片
+                    $image = Yii::$service->product->image->defautImg();
                 }
-                list($price, $special_price) = $this->getPrices($one['price'], $one['special_price'], $one['special_from'], $one['special_to']);
                 
-                $product_id = '';
-                if (isset($one['product_id']) && $one['product_id']) {
-                    $product_id = (string)$one['product_id'];
-                } else {
-                    $productPrimaryKey = Yii::$service->product->getPrimaryKey();
-                    $product_id = (string)$one[$productPrimaryKey];
-                }
+                // 品牌名称
+                $brand_name = $one['brand_id'] ? Yii::$service->product->brand->getBrandNameById($one['brand_id']) : '';
+
+                // 产品详情url
+                $url = Yii::$service->url->getUrl($one['url_key']);
+
+                // 是否特别价格
+                $is_active_special_price = Yii::$service->product->price->specialPriceisActive($one['price'], $one['special_price'], $one['special_from'], $one['special_to']);
+
                 $arr[] = [
-                    'name'              => $name,
-                    'sku'                 => $one['sku'],
+                    '_id'                     => $_id,
+                    'name'                    => $name,
+                    'sku'                     => $one['sku'],
+                    'image'                   => $image,
+                    'brand_id'                => $one['brand_id'],
+                    'brand_name'              => $brand_name,
+                    'url'                     => $url,
+                    'is_in_stock'             => $one['is_in_stock'],
                     'reviw_rate_star_average' => isset($one['reviw_rate_star_average']) ? $one['reviw_rate_star_average'] : 0,
-                    'review_count'   => isset($one['review_count']) ? $one['review_count'] : 0,
-                    '_id'                  => $product_id,
-                    'image'              => $image,
-                    'brand_id'              => $one['brand_id'],
-                    'price'                => $price,
-                    'special_price'     => $special_price,
-                    'url'                   => Yii::$service->url->getUrl($url_key),
-                    'product_id'        => $product_id,
-                    'is_in_stock' => $one['is_in_stock'],
+                    'review_count'            => isset($one['review_count']) ? $one['review_count'] : 0,
+                    'price'                   => $one['price'],
+                    'special_price'           => $is_active_special_price ? $one['special_price'] : '',
+                    'special_from'            => $is_active_special_price ? $one['special_from'] : '',
+                    'special_to'              => $is_active_special_price ? $one['special_to'] : '',
                 ];
             }
         }
 
         return $arr;
-    }
-
-    /**
-     * 处理，得到产品价格信息.
-     */
-    protected function getPrices($price, $special_price, $special_from, $special_to)
-    {
-        if (Yii::$service->product->price->specialPriceisActive($price, $special_price, $special_from, $special_to)) {
-            
-            return [$price, $special_price];
-        }
-
-        return [$price, 0];
     }
 }
