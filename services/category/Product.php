@@ -108,8 +108,8 @@ class Product extends Service
                 // 产品详情url
                 $url = Yii::$service->url->getUrl($one['url_key']);
 
-                // 是否特别价格
-                $is_active_special_price = Yii::$service->product->price->specialPriceisActive($one['price'], $one['special_price'], $one['special_from'], $one['special_to']);
+                // 价格
+                $price_info = Yii::$service->product->price->getCurrentCurrencyProductPriceInfo($one['price'], $one['special_price'], $one['special_from'], $one['special_to']);
 
                 $arr[] = [
                     '_id'                     => $_id,
@@ -122,10 +122,10 @@ class Product extends Service
                     'is_in_stock'             => $one['is_in_stock'],
                     'reviw_rate_star_average' => isset($one['reviw_rate_star_average']) ? $one['reviw_rate_star_average'] : 0,
                     'review_count'            => isset($one['review_count']) ? $one['review_count'] : 0,
-                    'price'                   => $one['price'],
-                    'special_price'           => $is_active_special_price ? $one['special_price'] : '',
-                    'special_from'            => $is_active_special_price ? $one['special_from'] : '',
-                    'special_to'              => $is_active_special_price ? $one['special_to'] : '',
+                    'price_msg'               => $price_info['price'],
+                    'special_price_msg'       => $price_info['special_price'],
+                    'special_from'            => $one['special_from'],
+                    'special_to'              => $one['special_to'],
                 ];
             }
         }
