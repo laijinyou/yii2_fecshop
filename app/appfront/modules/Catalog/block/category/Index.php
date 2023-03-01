@@ -76,25 +76,32 @@ class Index extends \yii\base\BaseObject
             return;
         }
 
+        // return the products of this category's messages.
         $productCollInfo     = $this->getCategoryProductColl();
-        $products            = $productCollInfo['coll'];
+        $products         = $productCollInfo['coll'];
         $this->_productCount = $productCollInfo['count'];
-        //echo $this->_productCount;
+        
+
+        // return this category's messages.
+        $category_name        = Yii::$service->store->getStoreAttrVal($this->_category['name'], 'name');
+        $category_image       = $this->_category['image'] ? Yii::$service->category->image->getUrl($this->_category['image']) : '';
+        $category_description = Yii::$service->store->getStoreAttrVal($this->_category['description'], 'description');
+
         return [
-            'name'              => Yii::$service->store->getStoreAttrVal($this->_category['name'], 'name'),
-            'name_default_lang' => Yii::$service->fecshoplang->getDefaultLangAttrVal($this->_category['name'], 'name'),
-            'image'             => $this->_category['image'] ? Yii::$service->category->image->getUrl($this->_category['image']) : '',
-            'description'       => Yii::$service->store->getStoreAttrVal($this->_category['description'], 'description'),
-            'products'          => $products,
-            'product_count'     => $this->_productCount,
-            'query_item'        => $this->getQueryItem(),
-            'product_page'      => $this->getProductPage(),
-            'product_mini_page' => $this->getProductMiniPage(),
-            'refine_by_info'    => $this->getRefineByInfo(),
-            'filter_info'       => Yii::$service->category->getFilterInfo($this->_category, $this->_where),
-            'filter_price'      => $this->getFilterPrice(),
-            'filter_category'   => $this->getFilterCategoryHtml(),
-            'categoryM'         => $this->_category,
+            'category_name'         => $category_name,
+            'name_default_lang'     => Yii::$service->fecshoplang->getDefaultLangAttrVal($this->_category['name'], 'name'),
+            'category_image'        => $category_image,
+            'category_description'  => $category_description,
+            'products'              => $products,
+            'product_count'         => $this->_productCount,
+            'query_item'            => $this->getQueryItem(),
+            'pagination'            => $this->getProductPage(),
+            'product_mini_page'     => $this->getProductMiniPage(),
+            'refine_by_info'        => $this->getRefineByInfo(),
+            'filter_info'           => Yii::$service->category->getFilterInfo($this->_category, $this->_where),
+            'filter_price'          => $this->getFilterPrice(),
+            'filter_category'       => $this->getFilterCategoryHtml(),
+            'categoryM'             => $this->_category,
         ];
     }
 
@@ -170,19 +177,23 @@ class Index extends \yii\base\BaseObject
      */
     protected function getProductPage()
     {
-        $productNumPerPage = $this->getNumPerPage();
+        // 一ページの商品量の制限をチェックする。
+        $productsLimitPerPage = $this->getNumPerPage();
+        // 商品の合計を取る。
         $productCount = $this->_productCount;
+        // ページのナンバーを取る
         $pageNum = $this->getPageNum();
+
         $config = [
-            'class'        => 'fecshop\app\appfront\widgets\Page',
-            'view'        => 'widgets/page.php',
-            'pageNum'        => $pageNum,
-            'numPerPage'    => $productNumPerPage,
+            'class'         => 'fecshop\app\appfront\widgets\Pagination',
+            'view'          => 'widgets/pagination.php',
+            'pageNum'       => $pageNum,
+            'numPerPage'    => $productsLimitPerPage,
             'countTotal'    => $productCount,
-            'page'            => $this->_page,
+            'page'          => $this->_page,
         ];
 
-        return Yii::$service->page->widget->renderContent('category_product_page', $config);
+        return Yii::$service->page->widget->renderContent('widgets_pagination', $config);
     }
     /**
      * 分类页面toolbar部分：
