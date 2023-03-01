@@ -159,7 +159,7 @@ class Index extends \yii\base\BaseObject
         $productCount = $this->_productCount;
         $pageNum = $this->getPageNum();
         $config = [
-            'class'       => 'fecshop\app\appfront\widgets\Page',
+            'class'       => 'fecshop\app\appfront\widgets\Pagination',
             'view'        => 'widgets/page_mini.php',
             'method'      => 'getMiniBar',
             'pageNum'     => $pageNum,
