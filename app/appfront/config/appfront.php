@@ -1,5 +1,4 @@
 <?php
-
 /**
  * 本文件在@appfront/web/index.php 处，会被引入。
  * 该配置文件会加载./modules/*.php，并合并成一个数组，返回。
@@ -112,15 +111,14 @@ $config = [
                                 'view'  => 'widgets/head.php',
                                 // 缓存
                                 'cache' => [
-                                    'timeout'    => 4500,  // 缓存过期时间
+                                    'timeout'  => 4500,  // 缓存过期时间
                                 ],
                             ],
                             'header' => [
                                 'class' => 'fecshop\app\appfront\widgets\Headers',
-                                // 根据多模板的优先级，依次去模板找查找该文件，直到找到这个文件。
                                 'view'  => 'widgets/header.php',
                                 'cache' => [
-                                    'timeout'    => 4500,
+                                    'timeout'  => 4500,
                                 ],
                             ],
                             'topsearch' => [
@@ -128,27 +126,21 @@ $config = [
                             ],
                             'menu' => [
                                 'class' => 'fecshop\app\appfront\widgets\Menu',
-                                // 根据多模板的优先级，依次去模板找查找该文件，直到找到这个文件。
                                 'view'  => 'widgets/menu.php',
-                                'cache' => [
-                                    //'timeout' 	=> 4500,
-                                ],
+                                'cache' => [],
                             ],
                             'footer' => [
                                 'class' => 'fecshop\app\appfront\widgets\Footer',
-                                // 根据多模板的优先级，依次去模板找查找该文件，直到找到这个文件。
                                 'view'  => 'widgets/footer.php',
-                                'cache' => [
-                                    //'timeout' 	=> 4500,
-                                ],
+                                'cache' => [],
                             ],
                             'scroll' => [
                                 // 'class' => 'fecshop\app\appfront\modules\Cms\block\widgets\Scroll',
-                                // 根据多模板的优先级，依次去模板找查找该文件，直到找到这个文件。
                                 'view'  => 'widgets/scroll.php',
                             ],
-                            'breadcrumbs' => [
-                                'view'  => 'widgets/breadcrumbs.php',
+                            'breadcrumb' => [
+                                'view'  => 'widgets/breadcrumb.php',
+                                'cache' => [],
                             ],
                             'flashmessage' => [
                                 'view'  => 'widgets/flashmessage.php',
@@ -162,8 +154,8 @@ $config = [
                         ],
                         'home' => [
                             'product_price' => [
-                                'class' 		=> 'fecshop\app\appfront\modules\Catalog\block\category\Price',
-                                'view'  		=> 'cms/home/index/price.php',
+                                'class'   => 'fecshop\app\appfront\modules\Catalog\block\category\Price',
+                                'view'    => 'cms/home/index/price.php',
                             ],
                         ],
                         'customer' => [
@@ -179,23 +171,23 @@ $config = [
                         ],
                         'category' => [
                             'price' => [
-                                'class' 		=> 'fecshop\app\appfront\modules\Catalog\block\category\Price',
-                                'view'  		=> 'catalog/category/price.php',
+                                'class'  => 'fecshop\app\appfront\modules\Catalog\block\category\Price',
+                                'view'   => 'catalog/category/price.php',
                             ],
                             'toolbar' => [
-                                'view'  		=> 'catalog/category/index/toolbar.php',
+                                'view'  => 'catalog/category/index/toolbar.php',
                             ],
                             'filter_refineby' => [
-                                'view'  		=> 'catalog/category/index/filter/refineby.php',
+                                'view'  => 'catalog/category/index/filter/refineby.php',
                             ],
                             'filter_subcategory' => [
-                               'view'  		=> 'catalog/category/index/filter/subcategory.php',
+                               'view'  	=> 'catalog/category/index/filter/subcategory.php',
                             ],
                             'filter_attr' => [
-                               'view'  		=> 'catalog/category/index/filter/attr.php',
+                               'view'  	=> 'catalog/category/index/filter/attr.php',
                             ],
                             'filter_price' => [
-                               'view'  		=> 'catalog/category/index/filter/price.php',
+                               'view'  	=> 'catalog/category/index/filter/price.php',
                             ],
                             
                         ],
@@ -220,12 +212,12 @@ $config = [
                                 'view'  => 'catalog/product/index/review.php',
                             ],
                             'payment' => [
-                                'view'			=> 'catalog/product/index/payment.php',
+                                'view'	=> 'catalog/product/index/payment.php',
                             ],
                         ],
                         'search' => [
                             'toolbar' => [
-                                'view'  		=> 'catalogsearch/index/index/toolbar.php',
+                                'view'  => 'catalogsearch/index/index/toolbar.php',
                             ],
                         ],
                         // 下单页面
