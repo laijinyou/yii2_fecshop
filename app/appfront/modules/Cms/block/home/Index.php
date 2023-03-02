@@ -4,57 +4,67 @@ namespace fecshop\app\appfront\modules\Cms\block\home;
 
 use Yii;
 
+// ホームーページ
 class Index extends \yii\base\BaseObject
 {
-    // This current app's name, such as appfront, apphtml5, appserver.
-    private $_appName = '';
-    // Given products' key, such as appfront_home, apphtml5_home, appserver_home.
-    private $_givenProductsKey = '';
+    // カルーセルの名前
+    protected $CAROUSEL_NAMES = array("best_seller_sku", "best_feature_sku");
+    // アプリの名前
+    protected $APP_NAME = "";
+    // storeの親キー
+    protected $STORE_PARENT_KEY = "";
+    // store接尾辞として付ける
+    protected $STORE_SUFFIX = "_home";
+    // HTMLヘッドメタデータ
+    protected $META_LENGTH = 5;
+    protected $TITLE = "meta_title";
+    protected $HEAD_META = array("meta_title", "meta_keywords", "meta_description");
 
-    private $_metaTitle = 'meta_title';
-    private $_metaKeywords = 'meta_keywords';
-    private $_metaDescription = 'meta_description';
-
-    // Get the last data for this current page.
+    // レスポンスのデータを取る
     public function getLastData()
     {
-        // Get this current app's name.
-        $this->_appName = Yii::$service->helper->getAppName();
-        if (!$this->_appName) {
-            return null;
-        }
-        $this->_givenProductsKey = $this->_appName.'_home';
+        // アプリ名前を取る
+        $this -> APP_NAME = Yii::$service->helper->getAppName();
+        // storeの親キー
+        $this -> STORE_PARENT_KEY = $this -> APP_NAME.$this -> STORE_SUFFIX;
+        // htmlのheadタグのデータを設置する
+        $this->setHtmlHead();
+        
+        // カルーセルの名前
+        $carouselNames = $this -> CAROUSEL_NAMES;
+        // カルーセルのデータを取る
+        $carousels = array();
+        foreach ($carouselNames as $carouselName) {
+            // カルーセルの商品を取る
+            $carousels[$carouselName] = $this->getCarouselProducts($carouselName);
+        };
 
-        $this->initHead();
-
-        // Here you can change the current layout File.
-        // Yii::$service->page->theme->layoutFile = 'home.php';
-
-        return [
-            'bestFeaturedProducts' => $this->getGivenProducts('best_feature_sku'),
-            'bestSellerProducts' => $this->getGivenProducts('best_seller_sku'),
-        ];
+        return $carousels;
     }
 
-    // Get given products by key.
-    public function getGivenProducts($key)
+    // カルーセルの商品を取る
+    public function getCarouselProducts($carouselName)
     {
-        $skusStr = Yii::$app->store->get($this->_givenProductsKey, $key);
-        $skusArr = explode(',', $skusStr);
+        // skus文字列を取る
+        $skus = Yii::$app->store->get($this -> STORE_PARENT_KEY, $carouselName);
+        // 文字列を文字列により分割して文字列の配列を返します
+        $product_skus = explode(',', $skus);
+        // 商品のデータを取る
+        $products = $this->getProductsBySkus($product_skus);
 
-        return $this->getProductBySkus($skusArr);
+        return $products;
     }
 
-    public function getProductBySkus($skus)
+    public function getProductsBySkus($product_skus)
     {
-        if (is_array($skus) && !empty($skus)) {
+        if (is_array($product_skus) && !empty($product_skus)) {
             $filter['select'] = [
                 'sku', 'spu', 'name', 'image',
                 'price', 'special_price',
                 'special_from', 'special_to','brand_id',
                 'url_key', 'score', 'reviw_rate_star_average', 'review_count'
             ];
-            $filter['where'] = ['in', 'sku', $skus];
+            $filter['where'] = ['in', 'sku', $product_skus];
             $products = Yii::$service->product->getProducts($filter);
             $products = Yii::$service->category->product->convertToCategoryInfo($products);
 
@@ -62,27 +72,23 @@ class Index extends \yii\base\BaseObject
         }
     }
 
-    // Init this current html head meta tags and values.
-    public function initHead()
+    // htmlのheadタグのデータを設置する。
+    public function setHtmlHead()
     {
-        // Get this current app's value.
-        $home_title = Yii::$app->store->get($this->_givenProductsKey, $this->_metaTitle);
-        $home_meta_keywords = Yii::$app->store->get($this->_givenProductsKey, $this->_metaKeywords);
-        $home_meta_description = Yii::$app->store->get($this->_givenProductsKey, $this->_metaDescription);
-
-        // Set the keywords meta tag in this current html.
-        Yii::$app->view->registerMetaTag([
-            'name' => 'keywords',
-            'content' => Yii::$service->store->getStoreAttrVal($home_meta_keywords, $this->_metaKeywords),
-        ]);
-
-        // Set the description meta tag in this current html.
-        Yii::$app->view->registerMetaTag([
-            'name' => 'description',
-            'content' => Yii::$service->store->getStoreAttrVal($home_meta_description, $this->_metaDescription),
-        ]);
-
-        // Set the title meta tag in this current html.
-        Yii::$app->view->title = Yii::$service->store->getStoreAttrVal($home_title, $this->_metaTitle);
+        // storeからヘッドメタデータを取る
+        foreach ($this -> HEAD_META as $meta) {
+            $data = Yii::$app->store->get($this -> STORE_PARENT_KEY, $meta);
+            $meta_data = Yii::$service->store->getStoreAttrVal($data, $meta);
+            if ($meta === $this -> TITLE) {
+                // HTMLのタイトルを設置する
+                Yii::$app->view->title = $meta_data;
+            } else {
+                // HTMLのkeywords、descriptionを設置する
+                Yii::$app->view->registerMetaTag([
+                    'name' => substr($meta, $this -> META_LENGTH),
+                    'content' => $meta_data,
+                ]);
+            }
+        };
     }
 }
